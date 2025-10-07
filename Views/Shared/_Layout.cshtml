@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Titlet</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="~/Content/css/homelayout.css" rel="stylesheet" />
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+
+        <div class="header-content">
+            <div class="header-left">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="Home" class="logo">
+                    <i class="fas fa-bolt"></i>
+                    <span>TechStore</span>
+                </a>
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="Index"><i class="fas fa-home"></i> Trang chủ</a></li>
+                        <li><a href="Contact"><i class="fas fa-envelope"></i> Liên hệ</a></li>
+                        <li><a href="About"><i class="fas fa-info-circle"></i> Về chúng tôi</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="header-right">
+                <div class="search-box">
+                    <input type="text" placeholder="Tìm kiếm sản phẩm...">
+                    <i class="fas fa-search"></i>
+                </div>
+                <button class="icon-btn" id="themeToggle" title="Chuyển đổi giao diện">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="icon-btn" title="Giỏ hàng">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="badge">3</span>
+                </button>
+                <button class="icon-btn" title="Thông báo">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge">5</span>
+                </button>
+                <div class="user-avatar" title="Tài khoản">
+                    <a href="/Account/Login"><i class="fas fa-user"></i></a>
+                </div>
+            </div>
+        </div>
+
+    </header>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+
+        <ul class="sidebar-menu">
+            <li class="sidebar-item">
+                <a class="sidebar-link" id="sidebarToggle" title="Thu gọn sidebar">
+                    <i class="fa-solid fa-bars"></i>
+                    <span>Danh mục</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="#" class="sidebar-link">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>Điện thoại</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="#" class="sidebar-link">
+                    <i class="fas fa-laptop"></i>
+                    <span>Laptop</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="#" class="sidebar-link">
+                    <i class="fas fa-headphones"></i>
+                    <span>Phụ kiện</span>
+                </a>
+            </li>
+            <div class="sidebar-divider"></div>
+            <li class="sidebar-item">
+                <a href="#" class="sidebar-link">
+                    <i class="fas fa-fire"></i>
+                    <span>Nổi bật</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="#" class="sidebar-link">
+                    <i class="fas fa-crown"></i>
+                    <span>Best Seller</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="#" class="sidebar-link">
+                    <i class="fas fa-tag"></i>
+                    <span>Khuyến mãi</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="#" class="sidebar-link">
+                    <i class="fas fa-star"></i>
+                    <span>Sản phẩm mới</span>
+                </a>
+            </li>
+            <div class="sidebar-divider"></div>
+            <li class="sidebar-item">
+                <a href="#" class="sidebar-link">
+                    <i class="fas fa-tablet-alt"></i>
+                    <span>Tablet</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="#" class="sidebar-link">
+                    <i class="fas fa-watch"></i>
+                    <span>Smartwatch</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="#" class="sidebar-link">
+                    <i class="fas fa-tv"></i>
+                    <span>TV & Monitor</span>
+                </a>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+        <h1>Chào mừng đến với TechStore</h1>
+        <p style="color: var(--text-secondary); margin-top: 1rem;">
+            Đây là khu vực nội dung chính của trang. Layout responsive và tối ưu cho mọi thiết bị.
+        </p>
+
+        <!-- Nội dung của bạn ở đây -->
+        <div style="margin-top: 2rem; padding: 2rem; background-color: var(--bg-secondary); border-radius: 12px;">
+            <h2>Thông tin sản phẩm</h2>
+            @RenderBody()
+        </div>
+    </main>
+    <script src="~/Scripts/self/cusstom.js"></script>
+</body>
+</html>

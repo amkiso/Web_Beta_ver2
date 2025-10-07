@@ -1,0 +1,83 @@
+﻿@model Web_Beta.Models.Product
+
+@{
+    ViewBag.Title = "Products";
+    Layout = "~/Views/Shared/_LayoutQuanLy.cshtml";
+}
+
+<h2>Products</h2>
+
+<div>
+    <h4>Product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Product_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Type_Product_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type_Product_ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descriptions)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descriptions)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Current_Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Current_Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sale_Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sale_Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Product_Image)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product_Image)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.supplier_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.supplier_ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Product_Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product_Status)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Product_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

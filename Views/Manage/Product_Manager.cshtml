@@ -1,0 +1,129 @@
+﻿
+@model IEnumerable<Web_Beta.Models.Product_Infomation>
+@{
+    ViewBag.Title = "Product_Manager";
+    Layout = "~/Views/Shared/_LayoutQuanLy.cshtml";
+}
+<style>
+    /* CSS cho Navbar */
+    .product-manager-navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 18px;
+       
+    }
+
+    .navbar-actions {
+        display: flex;
+        gap: 12px;
+    }
+
+    .navbar-search {
+        display: flex;
+        gap: 8px;
+    }
+
+    /* CSS cho Table container có thể cuộn */
+    .table-container {
+        max-height: 700px;
+        overflow-y: auto;
+        overflow-x:auto;
+        border: 1px solid #ddd;
+    }
+    .btn-small{
+        font-size:8px;
+        padding:5px;
+    }
+    /* === CSS MỚI CHO VIỆC CHỌN HÀNG === */
+    #product-table tbody tr {
+        cursor: pointer; /* Biến con trỏ thành hình bàn tay khi di chuột qua hàng */
+    }
+
+        #product-table tbody tr.selected {
+            background-color: #007bff; /* Màu nền xanh khi hàng được chọn */
+            color: white; /* Chữ màu trắng */
+        }
+
+            /* Giữ màu chữ của dropdown và các link không bị đổi thành màu trắng */
+            #product-table tbody tr.selected a,
+            #product-table tbody tr.selected select {
+                color: #212529;
+            }
+</style>
+
+<div class="product-manager-navbar">
+    <h2>Quản lý sản phẩm</h2>
+    <div>
+
+        
+    </div>
+    <div class="navbar-search">
+        <input type="text" class="form-control" placeholder="Nhập tên, mã sản phẩm để tìm kiếm..." id="search-input" name="search" style="width:40vh" />
+        <button type="button" class="btn btn-info" id="btn-search" >Tìm kiếm</button>
+        <button class="btn btn-secondary">Lọc</button>
+    </div>
+</div>
+
+<div class="table-container">
+    <table class="table table-hover" id="product-table"
+           data-edit-url="@Url.Action("Edit", "Manage")"
+           data-delete-url="@Url.Action("Delete", "Manage")"
+           data-search-url="@Url.Action("Product_Manager", "Manage")"
+           data-update-status-url="@Url.Action("UpdateStatus", "Manage")">
+        <thead class="table-light" style="position: sticky; top: 0; z-index: 1;">
+            <tr>
+                <th>Mã Sản phẩm</th>
+                <th>Tên sản phẩm</th>
+                <th>Mô tả</th>
+                <th>Tồn kho</th>
+                <th>Giá bán</th>
+                <th>Nhà cung cấp</th>
+                <th>Trạng thái</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr data-product-id="@item.product_id">
+                    <td>@item.product_id</td>
+                    <td>@item.product_name</td>
+                    <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                        @if (item.product_description != null && item.product_description.Any())
+                        {
+                            <span>@string.Join(", ", item.product_description)</span>
+                        }
+                        else
+                        {
+                            <span style="color:gray;">Không có mô tả</span>
+                        }
+                    </td>
+                    <td>@item.current_Quantity</td>
+                    <td>@item.sale_price</td>
+                    <td>@item.supplier_name</td>
+                    <td>
+                        <select class="form-control status-dropdown" data-productid="@item.product_id">
+                            <option value="selling" @(item.product_status == "selling" ? "selected" : "")>Selling</option>
+                            <option value="out of stock" @(item.product_status == "out of stock" ? "selected" : "")>Out of stock</option>
+                            <option value="discontinued" @(item.product_status == "discontinued" ? "selected" : "")>Discontinued</option>
+                        </select>
+                    </td>
+                    
+                    <td>
+                        @Html.ActionLink("Sửa", "Edit", "Manage", new { id = item.product_id }, new { @class = "btn btn-primary btn-small" })
+                        |
+                        @Html.ActionLink("Chi tiết", "Details", "Manage", new { id = item.product_id }, new { @class = "btn btn-secondary btn-small" })
+                        |
+                        @Html.ActionLink("Xóa", "Delete", "Manage", new { id = item.product_id }, new { @class = "btn btn-danger btn-small", onclick = "return confirm('Bạn có chắc muốn xóa sản phẩm này?');" })
+                    </td>
+
+                    
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+

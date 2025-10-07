@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Web_Beta.Models.product_import>
+
+@{
+    ViewBag.Title = "Import_Product";
+    Layout = "~/Views/Shared/_LayoutQuanLy.cshtml";
+}
+
+<h2>Import_Product</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Mã nhà cung cấp
+        </th>
+        <th>
+            Mã đơn hàng
+        </th>
+        <th>
+           Người tạo phiếu nhập
+        </th>
+        <th>
+            Ngày nhập hàng
+        </th>
+        <th>
+           Số lượng
+        </th>
+        <th>
+            Giá nhập hàng
+        </th>
+        <th>
+            Số tiền phải thanh toán
+        </th>
+        <th>
+           Trạng thái
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.supplier_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ID_user)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.import_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.import_price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.total_amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.status)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.import_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.import_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.import_id })
+        </td>
+    </tr>
+}
+
+</table>

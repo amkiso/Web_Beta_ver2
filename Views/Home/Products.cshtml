@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Web_Beta.Models.Product_Infomation>
+
+@{
+    ViewBag.Title = "Products";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/css/homelayout.css" rel="stylesheet" />
+<div class="product-grid">
+    @foreach (var product in Model)
+    {
+        <div class="product-card">
+            <img src="~/Content/Pic/images/@product.images"  class="product-image">
+            <div class="product-content">
+                <h3 class="product-name">@product.product_name</h3>
+                <div class="product-price">@product.sale_price.ToString("N0") ₫</div>
+                <div class="product-description">
+                    <ul>
+                        @foreach (var point in product.product_description)
+                        {
+                            <li>@point</li>
+                        }
+                    </ul>
+                </div>
+                <div class="product-actions">
+                    <button class="btn btn-add-cart">
+                        <i class="fas fa-cart-plus"></i> Thêm giỏ hàng
+                    </button>
+                    <button class="btn btn-buy-now" title="Mua ngay">
+                        <i class="fas fa-bolt"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<script src="~/Scripts/self/cusstom.js"></script>

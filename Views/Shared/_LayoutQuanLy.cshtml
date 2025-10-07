@@ -1,0 +1,298 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="~/Content/css/layoutstyle.css" rel="stylesheet" />
+    <style>
+        /* CSS gốc cho Submenu */
+        .submenu {
+            list-style: none;
+            padding-left: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .submenu.show { max-height: 200px; }
+        .submenu .nav-link { padding-left: 3rem; font-size: 0.9rem; }
+        .nav-link.has-submenu { position: relative; }
+        .nav-link.has-submenu::after {
+            font-family: 'Bootstrap Icons';
+            position: absolute;
+            right: 1rem;
+            transition: transform 0.3s ease;
+        }
+        .sidebar.collapsed .submenu,
+        .sidebar.collapsed .nav-link.has-submenu::after { display: none; }
+
+        /* CSS gốc cho Navbar Dropdown */
+        .nav-item.dropdown .dropdown-menu {
+            background-color: #3a3a3a;
+            border: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        .nav-item.dropdown .dropdown-item {
+            color: #fff;
+            padding: 0.5rem 1rem;
+            transition: background-color 0.2s ease;
+        }
+        .nav-item.dropdown .dropdown-item:hover { background-color: #4a4a4a; }
+        .nav-item.dropdown .dropdown-item i { margin-right: 0.5rem; width: 20px; }
+
+        /* === CSS MỚI CHO NAVBAR RESPONSIVE === */
+
+        /* 1. Lớp phủ (overlay) cho nền mờ */
+        .offcanvas-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.55);
+            z-index: 1040; /* Bên dưới menu nhưng trên nội dung chính */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.35s ease-in-out, visibility 0.35s ease-in-out;
+        }
+        .offcanvas-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* 2. Tùy chỉnh menu trượt từ phải sang */
+        @@media (max-width: 991.98px) {
+            .navbar-collapse {
+                position: fixed;
+                top: 0;
+                bottom: 0;
+                right: -100%; /* Bắt đầu bên ngoài màn hình */
+                width: 85%;
+                max-width: 320px;
+                height: 100vh; /* Cao bằng màn hình */
+                background-color: #2c2c2c;
+                z-index: 1045;
+                transition: right 0.35s ease-in-out;
+                display: block; /* Ghi đè display: flex của Bootstrap */
+                padding: 1rem;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+            }
+
+            /* Trạng thái khi menu đang trong quá trình chuyển động */
+            .navbar-collapse.collapsing {
+                height: 100vh;
+                transition: right 0.35s ease-in-out;
+            }
+
+            /* Trạng thái khi menu đã hiển thị */
+            .navbar-collapse.show {
+                right: 0; /* Di chuyển vào trong màn hình */
+            }
+
+            /* Điều chỉnh các mục trong menu responsive */
+            .navbar-collapse .navbar-nav {
+                flex-direction: column;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="offcanvas-overlay"></div>
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2c2c2c;">
+            <div class="container-fluid">
+                <a class="navbar-brand d-flex align-items-center" href="/Home/">
+                    <img src="~/Content/Pic/logo/logo.png" alt="Logo" class="rounded-circle me-2" style="width:9vh;">
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <div class="d-lg-none d-flex justify-content-end align-items-center p-3 border-bottom border-secondary mb-3">
+                        <a href="#"><span class="badge bg-secondary rounded-pill fs-6">user@example.com</span></a>
+                        <a href="#" class="nav-link text-white ms-3"><i class="bi bi-bell fs-4"></i></a>
+                    </div>
+
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Home/"><i class="bi bi-house-door me-2 fs-4"></i>Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="bi bi-chat-dots me-2 fs-4"></i>Messages</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="newDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-plus-circle me-2 fs-4"></i>New
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="newDropdown">
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i>User</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-bag"></i>Product</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-receipt"></i>Product Receipt</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <div class="d-none d-lg-flex align-items-center">
+                        <a href="#"><span class="badge bg-secondary rounded-pill me-3">user@example.com</span></a>
+                        <a href="#" class="nav-link text-white"><i class="bi bi-bell fs-4"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar-toggle" id="sidebarToggle">
+                <i class="bi bi-chevron-left"></i>
+            </div>
+        </nav>
+    </header>
+  
+    <div class="container-fluid mt-3">
+        <div class="row">
+            <nav class="col-md-3 col-lg-2 sidebar p-3" id="sidebar">
+
+
+                <ul class="nav flex-column mt-4">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="Dashboard">
+                            <i class="bi bi-speedometer2"></i>
+                            <span class="link-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-bar-chart-line"></i>
+                            <span class="link-text">Stats</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-image"></i>
+                            <span class="link-text">Media</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-file-earmark-text"></i>
+                            <span class="link-text">Page</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link has-submenu" href="#" id="productsToggle">
+                            <i class="bi bi-bag"></i>
+                            <span class="link-text">Products</span>
+                        </a>
+                        <ul class="submenu" id="productsSubmenu">
+                            <li class="nav-item">
+                                <a class="nav-link" href="Import_Product">
+                                    <i class="bi bi-receipt"></i>
+                                    <span class="link-text">Receipt</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="Product_Manager">
+                                    <i class="bi bi-person-badge"></i>
+                                    <span class="link-text">Manager</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-chat"></i>
+                            <span class="link-text">Comments</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-chat-dots"></i>
+                            <span class="link-text">Feedback</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="User">
+                            <i class="bi bi-person"></i>
+                            <span class="link-text">User</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-gear"></i>
+                            <span class="link-text">Setting</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <main class="col-md-9 col-lg-10 content" id="mainContent">
+               
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+    <footer class="text-center py-3 mt-4">
+        &copy; 2025 Tech Hub. All rights reserved.
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Script gốc cho sidebar
+        const sidebar = document.getElementById('sidebar');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const toggleIcon = sidebarToggle.querySelector('i');
+        const productsToggle = document.getElementById('productsToggle');
+        const productsSubmenu = document.getElementById('productsSubmenu');
+
+        sidebarToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+            if (sidebar.classList.contains('collapsed')) {
+                toggleIcon.classList.replace('bi-chevron-left', 'bi-chevron-right');
+                productsSubmenu.classList.remove('show');
+                productsToggle.classList.remove('active');
+            } else {
+                toggleIcon.classList.replace('bi-chevron-right', 'bi-chevron-left');
+            }
+        });
+
+        productsToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (!sidebar.classList.contains('collapsed')) {
+                productsSubmenu.classList.toggle('show');
+                productsToggle.classList.toggle('active');
+            }
+        });
+
+        // === SCRIPT MỚI CHO NAVBAR TRƯỢT PHẢI ===
+        document.addEventListener('DOMContentLoaded', function () {
+            const navbarCollapse = document.getElementById('navbarContent');
+            const overlay = document.querySelector('.offcanvas-overlay');
+            const body = document.body;
+
+            if (navbarCollapse) {
+                // Khi menu bắt đầu mở, hiển thị overlay và chặn cuộn trang
+                navbarCollapse.addEventListener('show.bs.collapse', function () {
+                    overlay.classList.add('show');
+                    body.style.overflow = 'hidden'; // Chặn cuộn
+                });
+
+                // Khi menu bắt đầu đóng, ẩn overlay và cho phép cuộn lại
+                navbarCollapse.addEventListener('hide.bs.collapse', function () {
+                    overlay.classList.remove('show');
+                    body.style.overflow = ''; // Cho phép cuộn lại
+                });
+
+                // Đóng menu khi nhấp vào overlay
+                overlay.addEventListener('click', function () {
+                    const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+                    if (bsCollapse) {
+                        bsCollapse.hide();
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

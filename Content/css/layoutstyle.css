@@ -1,0 +1,140 @@
+﻿body {
+    background-color: #f8f9fa;
+}
+
+.sidebar {
+    min-height: 100vh;
+    background-color: #212529;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+    .sidebar.collapsed {
+        width: 0 !important;
+        min-width: 0 !important;
+        padding: 0 !important;
+        overflow: hidden;
+    }
+
+    .sidebar .nav-link {
+        color: #fff;
+        font-size: 1rem;
+        padding: 0.75rem 1rem;
+        display: flex;
+        align-items: center;
+        border-radius: 0.5rem;
+        white-space: nowrap;
+        transition: all 0.3s ease;
+    }
+
+        .sidebar .nav-link i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+            min-width: 20px;
+        }
+
+    .sidebar.collapsed .nav-link i {
+        margin-right: 0;
+        display: none;
+    }
+
+
+    .sidebar .nav-link:hover {
+        background-color: #343a40;
+    }
+
+    .sidebar .nav-link .link-text {
+        transition: opacity 0.3s ease;
+    }
+
+    .sidebar.collapsed .nav-link .link-text {
+        opacity: 0;
+        display: none;
+    }
+
+.content {
+    background-color: #fff;
+    border-radius: 0.5rem;
+    padding: 2rem;
+    min-height: 100vh;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    flex: 1;
+}
+
+.sidebar.collapsed ~ .content {
+    max-width: 100%;
+    flex: 0 0 100%;
+}
+
+.sidebar-toggle {
+    position: fixed;
+    top: 70px;
+    left: 15px;
+    background-color: #212529;
+    border: 2px solid #f8f9fa;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.sidebar:not(.collapsed) .sidebar-toggle {
+    position: absolute;
+    top: 10px;
+    left: auto;
+    right: -17px;
+}
+
+.sidebar-toggle:hover {
+    background-color: #343a40;
+}
+
+.sidebar-toggle i {
+    color: #fff;
+    font-size: 1rem;
+}
+
+
+
+@media (max-width: 768px) {
+    .sidebar {
+        position: fixed;
+        left: 0;
+        top: 60px;
+        z-index: 999;
+        transform: translateX(0);
+    }
+
+        .sidebar.collapsed {
+            transform: translateX(-100%);
+        }
+
+    .sidebar-toggle {
+        left: 15px;
+        position: fixed;
+        top: 70px;
+    }
+
+    .sidebar:not(.collapsed) .sidebar-toggle {
+        left: 0;
+        right: -17px;
+        position: absolute;
+    }
+}
+/* Thêm vào cuối tệp layoutstyle.css */
+.sidebar-toggle.sidebar-open {
+    transform: translateX(14rem); /* Điều chỉnh giá trị này nếu chiều rộng sidebar của bạn khác */
+}
+
+@media (max-width: 991px) {
+    .sidebar-toggle.sidebar-open {
+        transform: translateX(15rem); /* Điều chỉnh cho phù hợp với mobile */
+    }
+}

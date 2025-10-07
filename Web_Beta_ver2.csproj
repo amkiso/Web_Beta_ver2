@@ -1,0 +1,935 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.22.1\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props" Condition="Exists('..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.22.1\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{23555A28-E2F7-4497-ACB7-52627C0C36D4}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Web_Beta_ver2</RootNamespace>
+    <AssemblyName>Web_Beta_ver2</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44343</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
+    <DockerLaunchUrl>http://{ServiceIPAddress}</DockerLaunchUrl>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO" />
+    <Reference Include="System.Runtime" />
+    <Reference Include="System.Security.Cryptography.Algorithms" />
+    <Reference Include="System.Security.Cryptography.Encoding" />
+    <Reference Include="System.Security.Cryptography.Primitives" />
+    <Reference Include="System.Security.Cryptography.X509Certificates" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.2.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.9\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.9\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\EditController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Product_Infomation.cs" />
+    <Compile Include="Models\SQLDataClasses.designer.cs" />
+    <Compile Include="Models\SQLDataClasses1.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SQLDataClasses.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Xuly.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-grid.rtl.css" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Content\bootstrap-utilities.css" />
+    <Content Include="Content\bootstrap-utilities.min.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap.rtl.css" />
+    <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\css\homelayout.css" />
+    <Content Include="Content\css\layoutstyle.css" />
+    <Content Include="Content\css\style.css" />
+    <Content Include="Content\Pic\images\231244-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-aspire-16-ai-a16-71m-59l5-ultra-5-nxj4ysv001-638774738263890291-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-aspire-16-ai-a16-71m-71u7-ultra-7-nxj4ysv002-638774738094769855-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-aspire-3-a314-42p-r3b3-r7-nxksfsv001-thumb-638754904905578083-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-aspire-3-a315-59-5283-i5-nxk6tsv00b-thumb-638754896181678129-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-aspire-5-a514-56p-54tn-i5-nxkhrsv004-thumb-638754904386253616-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-aspire-5-a515-58gm-51lb-i5-nxkq4sv002-140225-101136-979-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-aspire-5-a515-58gm-598j-i5-nxkw1sv002-638854988674476822-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-aspire-5-a515-58m-79r7-i7-nxkq8sv007-thumb-638754974350798562-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-aspire-7-a715-59g-73lb-i7-12650h-nh-qx6sv-002-thumb-638920001167311609-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-aspire-7-a715-76-53pj-i5-nhqgesv007-thumb-638760097930294611-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-aspire-7-gaming-a715-76g-5806-i5-nhqmfsv002-thumb-638754898004072091-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-aspire-a315-44p-r9w8-r7-nxksjsv002-thumb-638754902935171241-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-aspire-a515-58gm-53pz-i5-nxkq4sv008-thumb-638754955030945536-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-aspire-go-ag15-31p-30m4-i3-nxkrpsv004-thumb-638828183673538656-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-aspire-lite-14-51m-36pn-i3-nxktwsv001-thumb-638754958770106681-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-aspire-lite-14-51m-59bn-i5-nxktxsv001-thumb-638754957139160133-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-aspire-lite-14-al14-51p-35qd-i3-nxj84sv001-638854981847550542-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-aspire-lite-14-al14-71p-55p9-i5-13500h-nxd7usv001-thumb-638942357680285416-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-aspire-lite-15-al15-41p-r3ql-r7-nxj54sv001-thumb-638828183898800384-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-aspire-lite-15-al15-42p-r08m-r7-7730u-nx-d3qsv-001-thumb-638920855069278206-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-aspire-lite-15-al15-42p-r50r-r5-7430u-nxd34sv004-bac-thumb-638942356970285880-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-aspire-lite-15-al15-42p-r86y-r7-7730u-nxd3qsv003-bac-thumb-638942361018405881-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-aspire-lite-15-al15-42p-r8e6-r5-7430u-nx-d34sv-001-thumb-638920844070595603-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-aspire-lite-15-al15-71p-517d-i5-nxj7ksv001-thumb-638804825325953513-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-aspire-lite-15-al15-72p-581v-i5-13500h-nx-d4csv-001-thumb-638921804601704800-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-aspire-lite-16-ai-al16-71p-5674-ultra-5-125h-nx-d4xsv-001-thumb3-638906173311263825-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-aspire-lite-16-g2-al16-52p-572a-i5-nxj2ssv004-thumb-638760099944659967-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-aspire-lite-16-g2-al16-52p-76du-i7-nxj2ssv005-thumb-638760099849188217-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-aspire-lite-al14-52m-54cj-i5-nxj39sv002-638774738483558949-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-aspire-lite-al16-51p-596h-i5-nxkwzsv002-thumb-638754974494351179-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-nitro-5-tiger-an515-58-52sp-i5-nhqfhsv001-thumb-638754885062560645-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-nitro-an515-58-773y-i7-12700h-nhqfksv00116g-thumb-638760092227335057-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-nitro-lite-16-nl16-71g-71uj-i7-nhd59sv002-638854987194644024-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-nitro-v-15-anv15-41-r1jy-r5-nhqpfsv001-thumb-638760100059925740-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-nitro-v-15-anv15-41-r2up-r5-nhqpgsv004-638774737367845195-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-nitro-v-15-propanel-anv15-41-r7cr-r5-7535hs-nh-qpesv-003-thumb-638903379850275302-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-nitro-v-15-propanel-anv15-41-r9m1-r5-7535hs-nh-qpfsv-004-thumb-638899041200470601-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-nitro-v-15-propanel-anv15-52-59aa-i5-13420h-nh-qz9sv-002-thumb-638899029311369814-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-nitro-v-15-propanel-anv15-52-72bm-i7-13620h-nh-qz9sv-004-thumb-638899014448776181-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-nitro-v-16-propanel-anv16-41-r6zy-r5-nhqp2sv002-638765990357297678-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-nitro-v-anv15-51-53ne-i5-nhqnasv002-thumb-638754901390505338-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-nitro-v-anv15-51-55ca-i5-nhqn8sv004-thumb-638754948655940689-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-nitro-v-anv15-51-57b2-i5-nhqn8sv001-thumb-638754901224650221-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-predator-helios-18-ai-ph18-73-93p0-ultra-9-nhqvysv001-thumb-638828182821796512-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-predator-helios-18-ai-ph18-73-98aq-ultra-9-nhqvwsv001-thumb-638828182518741548-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-swift-ai-sf14-51-53p9-ultra-5-nxj2ksv002-638765990119867735-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-swift-go-14-41-r251-r5-nxkg3sv005-thumb-638754974034145190-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-swift-go-14-ai-73-71zx-ultra-7-nxkslsv002-638763553394679706-600x600.jpg" />
+    <Content Include="Content\Pic\images\acer-swift-lite-14-ai-sfl14-51m-56hs-ultra-5-nxj1hsv002-638765977106854836-600x600.jpg" />
+    <Content Include="Content\Pic\images\apple-macbook-air-m2-2022-vang-600x600.jpg" />
+    <Content Include="Content\Pic\images\apple-macbook-air-m2-2022-xanh-den-1-2-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-asus-vivobook-15-oled-a1505za-i5-ma415w-170225-110146-231-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-fa506ncr-r7-hn097w-170225-113322-493-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-fa506nfr-r7-hn113w-170225-113243-035-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-fa507nur-r7-lp057w-170225-111046-401-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-fa507nvr-r7-lp007w-170225-111125-946-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-fx507vu-i7-lp186w-170225-111211-001-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-fx507vv-i7-lp151w-thumb-638760122218940871-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-fx507zc4-i7-hn181w-170225-112333-757-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-g615jmr-i7-14650hx-s5155w-thumb-2-638905336861534690-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-gaming-tuf-f15-fx507zc4-i5-hn330w-170225-112440-295-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-gaming-v16-v3607vh-core-5-210h-rp084w-thumb-638920851141263452-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-gaming-v16-v3607vh-core-5-rp024w-638900134191689053-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-gaming-v16-v3607vm-core-7-rp044w-638900134042450638-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-gaming-v16-v3607vu-core-5-rp192w-638900134315949894-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-gaming-vivobook-k3605zu-i5-rp296w-170225-113033-642-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-k3605vc-i5-rp364w-thumb-638839519987207839-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-rog-strix-g16-g614ju-i7-n3509w-170225-114540-460-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-rog-strix-g16-g615jpr-i7-14650hx-s5107w-thumb-638920847718362047-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-s3407ca-ultra-5-ly095ws-638851479978389858-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-s3407ca-ultra-7-ly096ws-638900879294934441-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-s3607va-i5-rp055ws-638851479822036683-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-tuf-gaming-f15-fx507zc4-i5-hn229w-170225-104235-129-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-tuf-gaming-f16-fx607vj-core-5-rl034w-638895762903744422-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-tuf-gaming-f16-fx607vj-core-5-rl035w-638895762715696205-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-tuf-gaming-f16-fx608jhr-i7-rv037w-638895760935436861-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-tuf-gaming-f16-fx608jmr-i7-rv048w-638895762508534785-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-ux5406sa-ultra-7-pv140ws-638765977226776168-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-vivobook-14-a1407ca-ultra-5-ly008ws-638774634237279566-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-vivobook-14-x1404va-core-5-eb155ws-638895760599785280-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-vivobook-14-x1404va-i5-nk050w-170225-104151-335-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-vivobook-15-oled-a1505va-i5-l1341w-170225-103010-088-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-vivobook-15-oled-a1505va-i5-ma467w-170225-112915-031-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-vivobook-15-oled-a1505va-i9-ma586ws-170225-112950-659-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-vivobook-15-x1504va-i3-nj1634w-thumb-638760891054481940-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-vivobook-15-x1504va-i5-bq2225ws-thumb-638787552859411571-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-vivobook-15-x1504va-nj023w-140225-095856-105-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-vivobook-15-x1504za-i3-nj102w-170225-103541-756-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-vivobook-15-x1504za-i5-nj1546w-170225-112356-443-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-vivobook-16-a1607ca-ultra-5-mb038ws-638774634523597142-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-vivobook-16-a1607qa-x1-26-100-mb067ws-thumb-638850638816283275-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-vivobook-16-m1607ka-r7-ai-350-mb091ws-638774631402323373-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-vivobook-16-x1605va-i5-mb1876ws-160625-102211-696-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-vivobook-16-x1605va-i5-mb360w-250225-022408-338-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-vivobook-16-x1605va-i7-mb1875ws-160625-101200-046-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-vivobook-a1505va-i5-ma515ws-638900118156942901-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-vivobook-a1505va-i7-ma570ws-638900118300565483-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-vivobook-go-15-e1504fa-r5-nj776w-140225-100949-251-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-vivobook-k3605zc-i5-rp629w-170225-112605-145-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-vivobook-k3605zf-i5-rp745w-170225-112521-757-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-vivobook-s-14-oled-s5406ma-ultra-5-pp136w-638763569184637668-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-vivobook-s-14-s5406sa-ultra-5-pp060ws--638765992553878966-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-vivobook-s-14-s5406sa-ultra-7-pp059ws-638765992662987311-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-vivobook-s-16-m5606ka-r7-ai-350-ri016ws-thumb-638828165015904410-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-vivobook-s-16-oled-s5606ma-ultra-5-mx050w-638763553510092279-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-vivobook-s14-s3407va-i7-13620h-ly053w-thumb-638919138521960274-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-vivobook-s16-s3607va-core-5-210h-rp155ws-thumb-638919139295786834-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-vivobook-x1404za-i3-nk246w-170225-104314-786-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-vivobook-x1404za-i5-nk376w-170225-104858-294-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-x1404va-i5-nk771ws-thumb-new-638769442850201025-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-x1502va-i7-bq986ws-638900879461235815-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-x1504va-core-5-bq185ws-thumb2-638929335505560781-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-x1504za-i5-nj1608w-170225-113200-098-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-zenbook-14-oled-i5-km657w-170225-110225-422-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-zenbook-14-oled-thumb-mau-600x600.png" />
+    <Content Include="Content\Pic\images\asus-zenbook-14-oled-ux3405ma-ultra-7-pp152w-thumb-638763543290373422-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-zenbook-14-um3406ka-r7-ai-350-pp113ws-090625-110835-110-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-zenbook-14-um3406ka-r7-ai-350-pp590ws-thumb-638938786049170604-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-zenbook-14-ux3405ca-ultra-5-pz187ws-638774629870118990-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-zenbook-14-ux3405ca-ultra-7-pz368ws-638774633211655181-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-zenbook-14-ux3405ca-ultra-9-pz204ws-thumb-new-638828164694519022-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-zenbook-a14-ux3407qa-x1-26-100-qd299ws-638774630428732695-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-zenbook-duo-ux8406ca-ultra-9-pz109ws-638774633911635006-600x600.jpg" />
+    <Content Include="Content\Pic\images\asus-zenbook-s16-um5606ka-r7-ai-350-rk127ws-638900879149380019-600x600.jpg" />
+    <Content Include="Content\Pic\images\Black%2520%25281%2529-600x600.png" />
+    <Content Include="Content\Pic\images\del-alienware-16-aurora-ac1625-core-7-240h-c7h321w11ii5060-thumb-638893973899794164-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-15-dc15250-i5-dc5i5357w1-638900114676211077-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-15-dc15250-i7-dc5i7748w1-638900114799182560-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-15-dc15255-r5-7530u-dc5r5802w1-thumb-638920698565049808-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-alienware-16-aurora-ac16250-core-5-210h-71072939-thumb2-638939737088688848-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-alienware-16-aurora-ac16250-core-7-240h-71072937-thumb-01-638938002026687306-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-alienware-16-aurora-ac16250-core-7-240h-c7h161w11ii5050-thumb-638893911967537316-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-alienware-16-aurora-ac16250-core-9-270h-c9h321w11ii5070-thumb01-638893947190510711-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-g15-5530-i7-i7hx161w11gr4060-thumb-638754974781193495-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-g15-5530-i9-i9hx161w11gr4060-thumb-638754978080857967-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-14-5440-core-5-n4i5211w1-thumb-638841966420481159-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-14-5440-core-5-n5440c5u165w11ibd2-638895759863524449-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-14-5440-core-7-7fn5j-thumb-638754955274250524-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-14-5440-core-7-n4i7204w1-thumb-638754948363791973-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-14-5440-i5-ndy5v1-638774727166795143-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-14-5441-x1p-64-100-5mnk1-638895760313087821-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-14-5441-x1p-64-n4o10441w1-638900115125403698-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-15-3520-i5-1235u-n3520i5u085w11blufp-290425-115028-383-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-15-3520-i5-25p231-thumb-638754902669914908-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-15-3520-i5-71054775-638854982546544663-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-15-3520-i5-71064798-thumb-638828184201929000-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-15-3520-i5-n3520i5u085w11slu-290425-115021-064-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-15-3520-i5-n3520i5u165w11blufp-thumb-638760093894941508-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-15-3520-i5-n3520i5u165w11slubl-290425-115203-353-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-15-3520-i5-n5i5052w1-thumb-638754947183265925-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-15-3520-i5-n5i5057w1-638774726911323154-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-15-3520-i7-1255-71069748-thumb-638897293267474745-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-15-3520-i7-25p2315-thumb-638760098242571857-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-15-3520-i7-71053682-thumb-638760098370549871-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-15-3520-i7-n3520i7u165w11blufp-thumb-638760098095158958-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-15-3520-i7-n3520i7u165w11slu-bl-290425-115148-383-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-15-3520-i7-n5i7125w1-thumb-638760098504371682-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-15-3530-i3-1305u-n3530-i3u085w11slu-thumb-638937927534283365-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-15-3530-i5-1334u-p16wd21-thumb-638919966196437290-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-15-3530-i5-71043885-thumb-638754980699620343-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-15-3530-i5-71053696-thumb-638828188152325496-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-15-3530-i5-71070372-638900114510203065-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-15-3530-i5-n3530-i5u165w11slu-bl-thumb-638840243364698500-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-15-3530-i5-n3530-i5u165w11slu-hs24-638900112743874982-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-15-3530-i5-n3530i5u165w11slu-thumb-638754978853473065-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-15-3530-i5-n5i5340w1-thumb-638754974634417713-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-15-3530-i5-n5i5530w1-thumb-638762534676491196-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-15-3530-i5-p16wd2-thumb-638760095539784979-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-15-3530-i5-p16wd22-638895760085626264-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-15-3530-i7-1355u-n5i7421w1-thumb-638907888098741427-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-15-3530-i7-71026454-thumb-638754955549848250-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-15-3530-i7-71043888-thumb-638760091785605026-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-15-3530-i7-71053721-638900879577580798-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-15-3530-i7-n3530-i7u161w11slu-638900114347898134-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-15-3530-i7-n3530-i7u161w11slu-bl-638840244563868428-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-15-3530-i7-n3530i7u161w11blufp-thumb-638760096305237011-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-15-3530-i7-n5i7216w1-thumb-638840241952547194-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-15-3530-i7-n5i7301w1-thumb-638754980409982405-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-15-3530-i7-p16wd-thumb-638754948496889615-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-16-5640-core-7-n6i7512w1-thumb-638754957504176550-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-7440-core-5-n4i5006w1-thumb-638760092371412485-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-inspiron-7440-core-7-n7440c7u161w11ibu-thumb-638760093753246499-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-latitude-3450-i5-l34501335u16512w-thumb-638762637954790182-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-latitude-3450-i5-l34501335u16512wn-638895751182170399-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-latitude-3450-i7-71058806-638851475651047423-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-latitude-5350-ultra-7-165u-vpro-l5350165u16512w-thumb-638774730066348023-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-latitude-7350-ultra-5-l7350135u16512w-638854986362603212-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-vostro-15-3520-i5-v3520i5u165w11gru-thumb-638754980296542139-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-vostro-3520-i5-71030559-thumb-638754955875183877-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-vostro-3530-i5-80gg93-thumb-638754980276667501-600x600.jpg" />
+    <Content Include="Content\Pic\images\dell-xps-13-9350-ultra-7-258v-pp9h1-thumb-638920701947915998-600x600.jpg" />
+    <Content Include="Content\Pic\images\dien-thoai-oppo-a5x-blue-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\dien-thoai-oppo-a5x-white-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\galaxy-a17-5g-blue-thumbai-600x600.jpg" />
+    <Content Include="Content\Pic\images\galaxy-a17-5g-gray-thumbai-600x600.jpg" />
+    <Content Include="Content\Pic\images\gigabyte-a16-ga6h-i5-13420h-gaming-a16-cthh3vn893sh-thumb-638899248610359665-600x600.jpg" />
+    <Content Include="Content\Pic\images\gigabyte-a16-ga6h-i5-gaminga16cmhh2vn893sh-638828331771830623-600x600.jpg" />
+    <Content Include="Content\Pic\images\gigabyte-a16-ga6h-i7-13620h-gaming-a16-cvhi3vn893sh-thumb-638899249647843295-600x600.jpg" />
+    <Content Include="Content\Pic\images\gigabyte-a16-ga6h-i7-gaming-a16-cmhi2vn893sh-thumb-638850629550378282-600x600.jpg" />
+    <Content Include="Content\Pic\images\gigabyte-aero-x16-r7-ai-350-gigabyte-aero-x161vh93vnc64ah-thumb-638899250698522537-600x600.jpg" />
+    <Content Include="Content\Pic\images\gigabyte-aorus-16x-x6lag-i7-9rx6lasgddjixdvn010-thumb-638828334263331009-600x600.jpg" />
+    <Content Include="Content\Pic\images\gigabyte-aorus-master-16-ultra-9-16-byhc5vne64sh-thumb-638828328835231102-600x600.jpg" />
+    <Content Include="Content\Pic\images\gigabyte-g5-mf5-rc555-i5-9rc55mf5feiaa1vn0c0-638854981018094144-600x600.jpg" />
+    <Content Include="Content\Pic\images\gigabyte-g6-kf-rc56-i7-9rc56kf0hjiixivn000-090625-105402-911-600x600.jpg" />
+    <Content Include="Content\Pic\images\gigabyte-g6-mf-rc56-i7-9rc56mf0hjiixivn000-thumb-638828331434441636-600x600.jpg" />
+    <Content Include="Content\Pic\images\gigabyte-g6x-9kg-c6lg-i7-9rc6l9kghsjix1vn000-thumb-638828332089020205-600x600.jpg" />
+    <Content Include="Content\Pic\images\gigabyte-gaming-aero-x16-r7-ai-350-gigabyte-aero-x16-1vh93vnc94dh-thumb-638919995796683896-600x600.jpg" />
+    <Content Include="Content\Pic\images\honor-400-5g-12gb-256gb-den-200625-074233-864-600x600.jpg" />
+    <Content Include="Content\Pic\images\honor-400-lite-xam-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\honor-400-pro-xam-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\honor-400-vang-thumbn-600x600.jpg" />
+    <Content Include="Content\Pic\images\honor-magic-v3-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\honor-magic-v5-5g-16gb-512gb-080925-025118-961-600x600%2520%25281%2529-600x600.jpg" />
+    <Content Include="Content\Pic\images\honor-x5b-plus-blue-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\honor-x5b-xanh-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\honor-x6c-6gb-256gb-080725-103753-343-600x600.jpg" />
+    <Content Include="Content\Pic\images\honor-x6c-8gb-128gb-070725-020637-772-600x600.jpg" />
+    <Content Include="Content\Pic\images\honor-x7c-white-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\honor-x8b-green-thumb-1-600x600.jpg" />
+    <Content Include="Content\Pic\images\honor-x8c-green-thumb-638778940941716593-600x600.jpg" />
+    <Content Include="Content\Pic\images\honor-x9c-smart-xanh-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\honor-x9c-tim-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-15-fc0085au-r5-a6vv8pa-170225-110652-878-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-15-fd0015tu-i7-a19c5pa-170225-110311-023-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-15-fd0234tu-core-5-120u-9q969pa-120u-230725-094819-122-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-15-fd0234tu-i5-9q969pa-170225-105831-192-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-15-fd0235tu-core-5-120u-9q970pa-120u-thumb-638899119010495035-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-15-fd0235tu-i5-9q970pa-638900119541558326-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-15-fd0303tu-i3-a2nl4pa-170225-110423-551-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-15-fd1037tu-core-7-150u-9z2w5pa-thumb-2-638943948968294518-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-15-fd1039tu-core-7-150u-9z2w7pa-thumb-638895722708251676-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-15-fd1063tu-ultra-5-9z2y1pa-638763560680832041-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-15-fr0036tu-i5-13420h-bz7u2pa-thumb-638917395088397257-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-240-g10-i3-b73tjat-638851477921384452-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-240-g10-i5-9h2e4pt-170225-105517-942-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-240-g10-i5-b93gzat-638851478028822363-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-240-g9-i3-ag2j5at-170225-112837-008-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-240-g9-i5-ag2j7at-170225-112744-210-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-245-g10-r5-a20tdpt-170225-110347-587-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-245-g10-r5-b8pf9at-638828180409840419-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-elitebook-6-g1i-13-ultra-5-225u-bq9l8pt-thumb-638936194569042982-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-elitebook-6-g1i-13-ultra-5-225u-bq9m3pt-thumb-638936197502062185-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-elitebook-6-g1i-13-ultra-7-255u-bq9m6p-thumb-638936199477439480-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-elitebook-6-g1i-13-ultra-7-255u-bq9q3pt-thumb-638936203347169693-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-elitebook-630-g10-i5-19j0b4pt-170225-105604-008-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-elitebook-630-g10-i7-9h1n9pt-170225-111002-894-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-elitebook-635-aero-g11-r5-a8ws6pt-638774639120112172-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-elitebook-635-aero-g11-r7-a8ws7pt-638774639299583603-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-elitebook-635-aero-g11-r7-b91d3pt-thumb-638850648227666003-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-elitebook-ultra-g1q-x1e-78-100-b4py1pt-638851476833171882-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-elitebook-x360-830-g11-ultra-5-a7rb9pt-638765979492427202-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-elitebook-x360-830-g11-ultra-7-a7rc0pt-638765979599118299-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-envy-x360-14-fa0047au-r7-a19bppa-thumb-638833332894402249-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-envy-x360-14-fa0050au-r5-a29h8pa-638763569406294726-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-envy-x360-14-fa0097au-r5-ay8u7pa-638765979736002621-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-envy-x360-14-fc0153tu-ultra-7-ay8v4pa-638765981329703223-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-envy-x360-14-fc0162tu-ultra-5-ay8x1pa-638765977404161168-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-gaming-omen-16-am0127tx-i9-14900hx-bx8y0pa-thumb-638920597388720308-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-gaming-victus-15-fa2732tx-i5-13420h-b85lppa-thumb-638936205435701330-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-gaming-victus-16-r0130tx-i5-8c5n5pa-170225-103706-309-600x600-638851524989739404-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-gaming-victus-16-s0077ax-r7-8c5n6pa-thumb-638763542930752544-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-omen-14-fb0135tx-ultra-7-ay8v1pa-638765983673045610-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-omen-16-xf0071ax-r7-8w946pa-638763551717150025-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-omnibook-5-ai-16-af1046tu-ultra-5-225u-bz7q8pa-thumb1-638901867204514030-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-omnibook-5-ai-16-af1048tu-ultra-5-225u-bz7q9pa-thumb-638903541046032392-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-omnibook-uf-14-fh0095tu-ultra-9-288v-bz7s2pa-thumb1-638900991451132013-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-omnibook-uf-14-fh0097tu-ultra-7-258v-bz7s3pa-thumb1-638900995593888073-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-omnibook-x-14-fe1010qu-x1p-42-100-b53kbpa-thumb-638828178452652531-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-pavilion-15-eg2081tu-i5-7c0q4pa-170225-102926-862-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-pavilion-15-eg2082tu-i5-7c0q5pa-140225-095649-458-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-pavilion-15-eg2088tu-i7-7c0r0pa-170225-102227-835-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-pavilion-15-eg3091tu-i7-8c5l2pa-170225-103417-620-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-pavilion-15-eg3093tu-i5-8c5l4pa-170225-103330-013-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-pavilion-15-eg3094tu-i5-8c5l5pa-170225-103254-484-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-pavilion-15-eg3095tu-i5-8c5l6pa-16g-638900133897831058-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-pavilion-15-eg3112tu-i7-8u6l9pa-638900133723764453-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-pavilion-16-af0052tu-ultra-7-ay8c1pa-638900880383354075-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-pavilion-16-af0053tu-ultra-7-ay8c2pa-thumb-638828178123952574-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-pavilion-16-af0054tu-ultra-5-ay8c3pa-bac-15-638879333918766862-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-pavilion-16-af0055tu-ultra-5-ay8c4pa-thumb-638828179749624956-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-pavilion-x360-14-ek2013tu-core-7-9z2v4pa-638900119982403211-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-pavilion-x360-14-ek2017tu-core-5-9z2v5pa-638900119855465336-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-pavilion-x360-14-ek2024tu-core-5-9z2v6pa-170225-110535-640-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-pavilion-x360-14-ek2027tu-core-7-9z2v9pa-170225-110614-679-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-probook-4-g1i-16-ultra-5-225h-bq5d8pt-thumb-638936183578756697-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-probook-4-g1i-16-ultra-5-225u-bq5d4pt-thumb-638936179391158436-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-probook-4-g1i-16-ultra-7-255h-bq5e6pt-thumb-638936193148745736-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-probook-4-g1i-16-ultra-7-255u-bq5e1pt-thumb-638936189634777263-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-probook-450-g10-i5-9h1n5pt-170225-110838-638-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-probook-450-g10-i7-9h8h1pt-170225-110923-833-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-probook-455-g10-r5-b8pg7at-638900119673112884-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-victus-15-fa1139tx-i5-8y6w3pa-170225-104358-047-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-victus-15-fa2731tx-i5-b85lnpa-thumb-638833321610397298-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-victus-15-fb1022ax-r5-94f19pa-170225-104741-220-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-victus-15-fb3115ax-r7-7445hs-bx9c9pa-thumb-638899046284890217-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-victus-15-fb3116ax-r7-7445hs-bx8u4pa-thumb01-638899050739008488-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-victus-16-r0127tx-i7-8c5n2pa-170225-105918-087-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-victus-16-r0283tx-i5-ad9t3pa-170225-113116-254-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-victus-16-s0078ax-r5-8c5n7pa-638763555186271869-600x600.jpg" />
+    <Content Include="Content\Pic\images\hp-victus-16-s0173ax-r5-a9lg9pa-638763569195950325-600x600.jpg" />
+    <Content Include="Content\Pic\images\iphone-13-midnight-2-600x600.jpg" />
+    <Content Include="Content\Pic\images\iPhone-14-plus-thumb-xanh-600x600.jpg" />
+    <Content Include="Content\Pic\images\iphone-15-den-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\iphone-15-hong-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\iphone-15-plus-512gb-den-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\iphone-15-plus-hong-128gb-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\iphone-15-plus-hong-256gb-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\iphone-15-pro-max-blue-thumbnew-600x600.jpg" />
+    <Content Include="Content\Pic\images\iphone-15-xanh-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\iphone-16-black-600x600.png" />
+    <Content Include="Content\Pic\images\iphone-16-blue-600x600.png" />
+    <Content Include="Content\Pic\images\iphone-16-plus-hong.png" />
+    <Content Include="Content\Pic\images\iphone-16-plus-trang.png" />
+    <Content Include="Content\Pic\images\iphone-16-plus-xanh-mong-ket-thumbtgdd-600x600.png" />
+    <Content Include="Content\Pic\images\iphone-16-pro-max-sa-mac-thumb-1-600x600.jpg" />
+    <Content Include="Content\Pic\images\iphone-16-pro-max-tu-nhien-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\iphone-16-pro-titan-trang.png" />
+    <Content Include="Content\Pic\images\iphone-16e-black-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\iphone-16e-trang-thumb-1-600x600.jpg" />
+    <Content Include="Content\Pic\images\iphone-16e-white-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\iphone-17-512gb-xanh-duong-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\iphone-17-pro-1tb-cam-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\iphone-17-pro-512gb-xanh-duong-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\iphone-17-pro-max-1tb-cam-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\iphone-17-pro-max-2tb-bac-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\iphone-17-pro-max-512gb-cam-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\iphone-17-pro-max-xanh-duong-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\iphone-17-pro-xanh-duong-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\iphone-17-tim-thumb-0-600x600.jpg" />
+    <Content Include="Content\Pic\images\iphone-air-1tb-xanh-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\iphone-air-512gb-xanh-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\iphone-air-xanh-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-gaming-legion-5-15ahp10-r7-260-83m0002yvn-thumb-638913831113387894-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-gaming-legion-5-15ahp10-r7-260-83m00030vn-thumb-638913825776711514-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-gaming-legion-5-15irx10-i7-14700hx-83ly004gvn-thumb-638913727194776444-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-gaming-legion-5-15irx10-i7-14700hx-83ly00hyvn-thumb-638913820132408359-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-gaming-legion-7-16iax10-ultra-9-275hx-83ky001uvn-thumb-638918276094697126-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-gaming-legion-7-16iax10-ultra-9-275hx-83ky001vvn-thumb-638919990317524647-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-gaming-loq-15ahp10-r7-83jg0047vn-thumb-638912219462543713-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-gaming-loq-15arp9-r5-83jc00lvvn-thumb-638913694542734824-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-gaming-loq-15arp9-r5-83jc00m3vn-thumb-2-638913697258284809-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-gaming-loq-15irx9-i5-83dv01anvn-thumb-638913705000350912-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-gaming-loq-15irx9-i7-13650hx-83dv01alvn-thumb-638930572989400263-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-gaming-loq-15irx9-i7-83dv01amvn-thumb-638919739312731949-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-ideapad-1-15alc7-r7-82r400c1vn-thumb-638754849565313563-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-ideapad-5-2in1-14irh9-i5-83kx003wvn-638775477559068710-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-ideapad-slim-3-14irh10-i5-83k00008vn-thumb-638775456118509234-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-ideapad-slim-3-14irh10-i5-83k0000avn-thumb-638828193935419523-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-ideapad-slim-3-14irh10-i7-83k00007vn-thumb-638828197399083006-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-ideapad-slim-3-14irh10-i7-83k00009vn-thumb-638828197747305079-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-ideapad-slim-3-15amn8-r5-82xq00j0vn-thumb-638754862828598408-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-ideapad-slim-3-15irh10-i5-83k1000hvn-638775478046964172-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-ideapad-slim-3-15irh10-i7-83k1000fvn-638775476922755568-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-ideapad-slim-3-15irh10-i7-83k1000jvn-thumb-638828194277535409-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-ideapad-slim-3-16irh10-i5-83k20003vn-638775477302248017-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-ideapad-slim-3-oled-14irh10-i5-83k0000bvn-638900879896986125-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-ideapad-slim-3-oled-14irh10-i5-83k0000cvn-thumb-638828193578993263-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-ideapad-slim-5-14ahp10-r7-83hv001mvn-140525-115213-112-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-ideapad-slim-5-oled-14akp10-r5-ai-350-83hx0065vn-638900878482194553-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-ideapad-slim-5-oled-14akp10-r7-ai-350-83hx0066vn-638900878352201957-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-ideapad-slim-5-oled-14iah10-ultra-5-83nc001vvn-thumb-638915473286203418-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-ideapad-slim-5-oled-14iah10-ultra-7-83nc001avn-thumb-638862892252761435-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-ideapad-slim-5-oled-14iah10-ultra-7-83nc001wvn-thumb-638913675540581001-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-ideapad-slim-5-oled-14irh10-i5-83hr005yvn-thumb-638828193068991651-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-ideapad-slim-5-oled-14irh10r-core-5-83j0006cvn-thumb-638921508741625183-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-ideapad-slim-5-oled-14irh10r-core-5-83j0006dvn-thumb-638921512192914437-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-ideapad-slim-5-oled-14irh10r-core-5-83j0006evn-thumb-638921505194553525-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-ideapad-slim-5-oled-15arp10-r7-83j3001dvn-thumb-638828195490135190-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-ideapad-slim-5-oled-15arp10-r7-83j3002svn-thumb-638851465607267025-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-legion-5-15irx10-i7-83ly00a6vn-638900119036806800-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-legion-5-15irx10-i7-83ly00a7vn-638900118879319670-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-legion-5-pro-16iax10-ultra-9-83f3002gvn-638895738100908639-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-legion-5-pro-16iax10-ultra-9-83f3003vvn-638895736457711986-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-legion-pro-7-16iax10h-ultra-9-275hx-83f5008wvn-190625-100558-078-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-loq-15arp9-r5-83jc00kuvn-638895763122821615-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-loq-15arp9-r7-83jc00j0vn-thumb-638836810498069691-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-loq-15iax9-i5-83gs00d9vn-thumb-638754869781903463-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-loq-15iax9e-i5-83lk000bvn-thumb-638754880317162569-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-loq-15iax9e-i5-83lk0079vn-thumb-638828190971476549-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-loq-15irx9-i5-83dv003cvn-638828191874856424-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-loq-15irx9-i5-83dv00psvn-638828191559515253-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-loq-gaming-15iax9-i5-83gs000jvn-thumb-638754851503076038-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-thinkbook-14-g7-ultra-7-21mr0070vn-638765987940469421-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-thinkbook-14-g8-core-5-210h-21sg007svn-thumb-638913707861590783-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-thinkbook-14-ultra-7-21mr0072vn-638763566707170791-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-thinkbook-14-ultra-7-21sj006yvn-638900882453522585-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-thinkbook-16-g7-ultra-7-21ms007hvn-638765988016995947-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-thinkbook-16-oled-g8-irl-core-5-21sh0097vn-638900903851009611-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-thinkbook-16-ultra-7-21sk006yvn-638900134769045175-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-thinkpad-e14-gen-7-ultra-5-225u-21sx005qvn-thumb-638913690154583326-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-thinkpad-e14-gen-7-ultra-5-225u-21sx005rvn-thumb2.-638913689489406397-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-thinkpad-t14s-ultra-7-21r1000avn-638895738352940173-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-thinkpad-v14-i7-83a00012vn-thumb-638754868959893842-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-thinkpad-x1-2in1-gen-10-ultra-7-255u-21q0003jvn-thumb360-638936150078247582-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-thinkpad-x1-carbon-oled-ultra-7-21nx003bvn-638895738593400160-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-thinkpad-x1-carbon-ultra-5-21nx0038vn-638895738902527278-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-thinkpad-x9-15-oled-ultra-5-21q60050vn-638895739086390109-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-thinkpad-x9-15-ultra-7-21q60054vn-638895742368938478-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-v14-core-5-83hd0001vn-thumb-638754877371853493-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-v14-g4-amn-r5-82yt00ynvn-638900118451583892-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-v15-g5-irl-core-5-83hf0000vn-thumb-638754875612151635-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-yoga-slim-7-15ill9-ultra-7-83hm000gvn-638765995313926976-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-yoga-slim-7-oled-14ill10-ultra-7-258v-83jx0081vn-thumb-2-638918925583587246-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-yoga-slim-7-oled-14ill10-ultra-7-83jx0037vn-638851473905555637-600x600.jpg" />
+    <Content Include="Content\Pic\images\lenovo-yoga-slim-9-oled-14ill10-ultra-7-83cx001avn-thumb-638828196653232496-600x600.jpg" />
+    <Content Include="Content\Pic\images\macbook-air-13-inch-m4-16gb-256gb-sac-70w-thumb1-638903386914459770-600x600.jpg" />
+    <Content Include="Content\Pic\images\macbook-air-13-inch-m4-vang-600x600.jpg" />
+    <Content Include="Content\Pic\images\macbook-air-13-inch-m4-xanh-da-troi-600x600.jpg" />
+    <Content Include="Content\Pic\images\macbook-air-13-inch-m4-xanh-den-600x600.jpg" />
+    <Content Include="Content\Pic\images\macbook-air-15-inch-m4-xanh-da-troi-1-600x600.jpg" />
+    <Content Include="Content\Pic\images\macbook-air-15-inch-m4-xanh-da-troi-600x600.jpg" />
+    <Content Include="Content\Pic\images\macbook-pro-14-inch-m4-16gb-1tb-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\macbook-pro-14-inch-m4-pro-den-600x600.jpg" />
+    <Content Include="Content\Pic\images\macbook-pro-14-inch-m4-thumb-den-600x600.jpg" />
+    <Content Include="Content\Pic\images\macbook-pro-14-nano-m4-max-den-600x600.jpg" />
+    <Content Include="Content\Pic\images\masstel-s9-gold-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-bravo-15-b7ed-r5-010vn-thumb-638754849999959588-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-creator-m16-hx-c14vfg-i7-040vn-thumb-638754863419001480-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-creator-z17-hx-studio-a14vgt-i7-272vn-thumb-638754863143269122-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-cyborg-14-a13ve-i7-090vn-thumb-638754864859686533-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-cyborg-15-a13vek-i7-1423vn-thumb-638754872255271079-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-gaming-cyborg-15-ai-a1vek-ultra-7-053vn-thumb-638763544027585458-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-gaming-gf63-thin-12uc-i7-887vn-thumb-638754850221823962-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-gaming-gf63-thin-12ve-i5-460vn-thumb-638754845982942054-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-gaming-sword-16-hx-b14vfkg-i7-045vn-thumb-638754862392792943-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-gaming-thin-15-b13uc-i5-13420h-3247vn-16gb-thumb-638918266398971749-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-gf63-thin-12ve-i5-460vn-thumb-638754869517722845-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-katana-15-b13udxk-i5-2410vn-638895766162144479-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-katana-15-b13udxk-i7-2077vn-140225-102541-296-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-katana-15-b13vek-i5-2416vn-thumb-638827284934668611-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-katana-15-b13vek-i7-13620h-2256vn-thumb01-638896822560434419-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-katana-15-b13vfk-i7-676vn-thumb-638754846187201114-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-katana-15-hx-b14wek-i5-14450hx-286vn-thumb-638899040893897338-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-katana-15-hx-b14wek-i7-14650hx-027vn-thumb02-638897277627603509-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-katana-15-hx-b14wfk-i7-14650hx-025vn-thumb-638899039749026960-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-katana-15-hx-b14wfk-i7-14650hx-267vn-thumb-638899038470195527-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-katana-a15-ai-b8vg-r7-465vn-638763555401666860-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-modern-14-c13m-i5-611vn-thumb-638754873006236091-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-modern-14-f1mg-core-5-432vn-638895765720179705-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-modern-15-b12mo-i5-625vn-thumb-638754846387666819-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-modern-15-f13mg-i5-082vn-thumb-638754880042706463-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-modern-15-f13mg-i5-1334u-667vn-16gb-thumb-638918260281909685-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-prestige-13-ai-a2vmg-ultra-7-258v-040vn-638765986132105728-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-prestige-13-ai-evo-a1mg-ultra-7-062vn-638763551415913069-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-prestige-14-ai-evo-c2vmg-ultra-7-020vn-638900880569143429-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-prestige-14-ai-studio-c1udxg-ultra-7-058vn-638765973571921527-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-prestige-14-ai-studio-c1veg-ultra-7-056vn-638765973712989123-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-prestige-16-ai-b2vmg-ultra-9-288v-016vn-638765986007921725-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-prestige-16-ai-mercedes-amg-b2vmg-ultra-9-288v-088vn-thumb02-638895810569261564-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-raider-18-hx-ai-a2xwig-ultra-9-033vn-638828336037875812-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-stealth-14-ai-studio-a1vfg-ultra-7-085vn-638763555070436708-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-stealth-18-hx-ai-a2xwig-ultra-9-017vn-638828336274186786-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-stealth-a16-mercedes-amg-ai-a3xwgg-r9-ai-hx-370-032vn-thumb-638893868333375840-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-thin-15-b12uc-i5-2045vn-140225-102658-520-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-thin-15-b12ucx-i5-2046vn-140225-102530-055-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-thin-15-b13uc-i7-13620h-1411vn-16gb-638869775371673998-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-thin-15-b13uc-i7-1411vn-thumb-638754877819827918-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-thin-15-b13ucx-i5-2080vn-thumb-638754877576794523-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-titan-18-hx-ai-a2xwig-ultra-9-090vn-638828335301583094-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-vector-16-hx-ai-a2xwhg-ultra-7-255hx-010vn-32gb-638895765455729750-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-vector-16-hx-ai-a2xwig-ultra-9-062vn-638828336640479970-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-venture-a14-ai-a3hmg-r5-ai-340-004vn-638895763373785370-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-venture-a15-ai-a2hmg-r7-003vn-638895766508733267-600x600.jpg" />
+    <Content Include="Content\Pic\images\msi-venturepro-16-ai-a1veg-ultra-7-003vn-thumb-638804825502018054-600x600.jpg" />
+    <Content Include="Content\Pic\images\oppo-a3-black-thumb-1-600x600.jpg" />
+    <Content Include="Content\Pic\images\oppo-a3-purple-thumb-1-600x600.jpg" />
+    <Content Include="Content\Pic\images\oppo-a3x-blue-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\oppo-a3x-red-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\oppo-a5-green-thumbn-600x600.jpg" />
+    <Content Include="Content\Pic\images\oppo-a5-pro-blue-thumbai-600x600.jpg" />
+    <Content Include="Content\Pic\images\oppo-a5-pro-pink-thumbai-600x600.jpg" />
+    <Content Include="Content\Pic\images\oppo-a5-white-thumbn-600x600.jpg" />
+    <Content Include="Content\Pic\images\oppo-a58-4g-green-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\oppo-a5i-do-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\oppo-a5i-pro-white-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\oppo-a5i-purple-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\oppo-a5i-red-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\oppo-a6-pro-dark-blue-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\oppo-a6-pro-pink-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\oppo-a60-blue-thumb-1-600x600.jpg" />
+    <Content Include="Content\Pic\images\oppo-a60-blue-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\oppo-find-n3-flip-hong-thumb-1-600x600.jpg" />
+    <Content Include="Content\Pic\images\oppo-find-n3-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\oppo-find-n5-black-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\oppo-find-x8-hong-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\oppo-find-x8-pro-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\oppo-find-x8-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\oppo-n3-flip-den-thumbai-600x600.jpg" />
+    <Content Include="Content\Pic\images\oppo-reno12-5g-12gb-512gb-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\oppo-reno12-f-4g-8gb-256gb-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\oppo-reno12-f-5g-8gb-256gb-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\oppo-reno12-f-5g-cam-thumbai-600x600.jpg" />
+    <Content Include="Content\Pic\images\oppo-reno12-pro-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\oppo-reno13-blue-thumbnew-600x600.jpg" />
+    <Content Include="Content\Pic\images\oppo-reno13-f-purple-thumbnew-600x600.jpg" />
+    <Content Include="Content\Pic\images\oppo-reno13-white-thumbnew-600x600.jpg" />
+    <Content Include="Content\Pic\images\oppo-reno14-5g-green-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\oppo-reno14-5g-white-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\oppo-reno14-f-5g-blue-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\oppo-reno14-f-5g-green-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\oppo-reno14-f-5g-pink-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\oppo-reno14-pro-5g-white-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\oppo-reoo13-pro-5g-gray-thumbnew-600x600.jpg" />
+    <Content Include="Content\Pic\images\realme-14-5g-sliver-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\realme-14-5g-xam-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\realme-14t-5g-black-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\realme-14t-5g-purple-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\realme-15-5g-pink-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\realme-15-5g-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\realme-15t-gray-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\realme-15t-pro-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\realme-15t-sliver-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\realme-c71-den-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\realme-c71-trang-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\realme-c75-8gb-128gb-thumb-1-600x600.jpg" />
+    <Content Include="Content\Pic\images\realme-c75-8gb-256gb-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\realme-c75-8gb-512gb-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\realme-c75x-pink-thumbn-600x600.jpg" />
+    <Content Include="Content\Pic\images\realme-c75x-xanh-thumbn-600x600.jpg" />
+    <Content Include="Content\Pic\images\realme-note-60-black-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\realme-note-60-blue-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\realme-note-60x-4gb-191224-040048-245-600x600.jpg" />
+    <Content Include="Content\Pic\images\realme-note-60x-xanh-thumb-638702210952165468-600x600.jpg" />
+    <Content Include="Content\Pic\images\realme-note-70-4gb-128gb-160725-094949-615-600x600.jpg" />
+    <Content Include="Content\Pic\images\realme-note-70-4gb-64gb-160725-095001-095-600x600.jpg" />
+    <Content Include="Content\Pic\images\redmi-13-yellow-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-a06-5g-black-thumbn-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-a06-black-thumbn-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-a06-blue-thumbn-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-a07-black-thumbnew-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-a07-green-thumbnew-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-a07-violet-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-a16-5g-gold-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-a16-gray-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-a16-green-thumb-1-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-a17-lte-den-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-a17-lte-xam-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-a17-lte-xanh-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-a26-5g-black-thumbn-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-a26-5g-green-thumbn-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-a26-5g-hong-thumbn-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-a36-5g-black-thumb-1-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-a36-5g-green-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-a36-5g-purple-thumb-1-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-a56-5g-gray-thumb-1-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-a56-pink-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-chromebook-go-xe310xda-n4500-thumb-638754875374951003-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-chromebook-go-xe340xda-n4500-thumb-638754875185657229-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-s24-256gb-5g-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-s24-fe-8gb-256gb-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-s24-fe-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-s24-ultra-5g-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-s25-edge-blue-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-s25-edge-sliver-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-s25-fe-blue-thumbai-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-s25-fe-navy-thumbai-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-s25-fe-white-thumbai-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-s25-gray-thumbai-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-s25-green-thumbai-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-s25-plus-blue-thumbai-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-s25-plus-navy-thumbai-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-s25-ultra-1tb-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-s25-ultra-512gb-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-s25-ultra-blue-thumbai-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-z-flip7-fe-black-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-z-flip7-fe-white-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-z-flip7-red-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-z-flip7-xanh-navy-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-z-fold7-black-thumb-1-600x600.jpg" />
+    <Content Include="Content\Pic\images\samsung-galaxy-z-fold7-xanh-navy-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\tcl-60-nxtpaper-thumb-638815418653447514-600x600.jpg" />
+    <Content Include="Content\Pic\images\tecno-spark-30-white-thumb-638761785148564781-600x600.jpg" />
+    <Content Include="Content\Pic\images\tecno-spark-30c-white-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\tecno-spark-go-1-black-thumb-1-600x600.jpg" />
+    <Content Include="Content\Pic\images\tecno-spark-go-2-xanh-thumb-638899027806878098-600x600.jpg" />
+    <Content Include="Content\Pic\images\vivo-v30-black-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\vivo-v30e-nau-thumb-1-600x600.jpg" />
+    <Content Include="Content\Pic\images\vivo-v40-5g-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\vivo-v40-lite-tim-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\vivo-v50-lite-den-5g-thumbai-600x600.jpg" />
+    <Content Include="Content\Pic\images\vivo-v50-lite-gold-5g-thumbai-600x600.jpg" />
+    <Content Include="Content\Pic\images\vivo-v50-lite-tim-thumbai-600x600.jpg" />
+    <Content Include="Content\Pic\images\vivo-v60-5g-tim-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\vivo-v60-5g-xam-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\vivo-y03-xanh-thumb-1-600x600.jpg" />
+    <Content Include="Content\Pic\images\vivo-y04-gold-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\vivo-y04-green-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\vivo-y18-nau-thumb-1-600x600.jpg" />
+    <Content Include="Content\Pic\images\vivo-y18-nau-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\vivo-y19s-den-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\vivo-y19s-pro-bac-thumb-1-600x600.jpg" />
+    <Content Include="Content\Pic\images\vivo-y19s-pro-den-thumb-1-600x600.jpg" />
+    <Content Include="Content\Pic\images\vivo-y19s-pro-xanh-thumb-1-600x600.jpg" />
+    <Content Include="Content\Pic\images\vivo-y28-vang-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\vivo-y28-xanh-thumbn-600x600.jpg" />
+    <Content Include="Content\Pic\images\vivo-y29-nau-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\vivo-y29-trang-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\vivo-y39-tim-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\vivo-y39-xanh-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\xiaomi-14t-5g-12gb-512gb-xanh-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\xiaomi-14t-5g-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\xiaomi-14t-pro-5g-12gb-256gb-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\xiaomi-15-black-thumbnew-600x600.jpg" />
+    <Content Include="Content\Pic\images\xiaomi-15-ultra-black-thumbnew-600x600.jpg" />
+    <Content Include="Content\Pic\images\xiaomi-15-ultra-white-thumbnew-600x600.jpg" />
+    <Content Include="Content\Pic\images\xiaomi-15-white-thumbnew-600x600.jpg" />
+    <Content Include="Content\Pic\images\xiaomi-15t-gray-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\xiaomi-15t-pro-black-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\xiaomi-15t-pro-gray-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\xiaomi-15t-pro-rose-gold-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\xiaomi-15t-rose-gold-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\xiaomi-redmi-13x-blue-thumbn-600x600.jpg" />
+    <Content Include="Content\Pic\images\xiaomi-redmi-13x-titanium-thumbn-600x600.jpg" />
+    <Content Include="Content\Pic\images\xiaomi-redmi-14c-black-1-600x600.jpg" />
+    <Content Include="Content\Pic\images\xiaomi-redmi-15-tim-thumbnew-600x600.jpg" />
+    <Content Include="Content\Pic\images\xiaomi-redmi-15-vang-titan-thumbnew-600x600.jpg" />
+    <Content Include="Content\Pic\images\xiaomi-redmi-a3-xanh-lá-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\xiaomi-redmi-a5-blue-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\xiaomi-redmi-note-14-5g-green-thumbai-600x600.jpg" />
+    <Content Include="Content\Pic\images\xiaomi-redmi-note-14-8gb-128gb-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\xiaomi-redmi-note-14-8gb-256gb-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\xiaomi-redmi-note-14-pro-plus-thumbnew-600x600.jpg" />
+    <Content Include="Content\Pic\images\xiaomi-redmi-note-14-pro-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\images\xiaomi-redmi-note-14-pro-thumbnew-600x600.jpg" />
+    <Content Include="Content\Pic\images\xiaomi-redmi-note-14-pro-xanh-thumbnew-600x600.jpg" />
+    <Content Include="Content\Pic\images\xiaomi-redmi-note-14-thumb-600x600.jpg" />
+    <Content Include="Content\Pic\logo\logo.png" />
+    <Content Include="Content\Site.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.esm.js" />
+    <Content Include="Scripts\bootstrap.esm.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.css.map" />
+    <Content Include="Content\bootstrap-utilities.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.rtl.css.map" />
+    <Content Include="Content\bootstrap.rtl.min.css.map" />
+    <None Include="Dockerfile" />
+    <None Include=".dockerignore">
+      <DependentUpon>Dockerfile</DependentUpon>
+    </None>
+    <Content Include="Models\SQLDataClasses.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>SQLDataClasses1.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Models\SQLDataClasses.dbml.layout">
+      <DependentUpon>SQLDataClasses.dbml</DependentUpon>
+    </None>
+    <None Include="Scripts\jquery-3.7.0.intellisense.js" />
+    <Content Include="Scripts\jquery-3.7.0.js" />
+    <Content Include="Scripts\jquery-3.7.0.min.js" />
+    <Content Include="Scripts\jquery-3.7.0.slim.js" />
+    <Content Include="Scripts\jquery-3.7.0.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\self\cusstom.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Account\FogotPassword.cshtml" />
+    <Content Include="Views\Account\Info.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Manage\Dashboard.cshtml" />
+    <Content Include="Views\Manage\Import_Product.cshtml" />
+    <Content Include="Views\Manage\Products.cshtml" />
+    <Content Include="Views\Manage\Product_Manager.cshtml" />
+    <Content Include="Views\Manage\User.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_LayoutQuanLy.cshtml" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Edit\Index.cshtml" />
+    <Content Include="Views\Home\Products.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Views\Error\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.esm.min.js.map" />
+    <Content Include="Scripts\bootstrap.esm.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Scripts\jquery-3.7.0.slim.min.map" />
+    <Content Include="Scripts\jquery-3.7.0.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>53951</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44343/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.22.1\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.22.1\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.22.1\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.22.1\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets'))" />
+  </Target>
+  <Import Project="..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.22.1\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets" Condition="Exists('..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.22.1\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>
