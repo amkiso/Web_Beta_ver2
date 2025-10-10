@@ -1,0 +1,167 @@
+﻿@model Web_Beta_ver2.Models.UserDataViewModel
+
+@* Chuông thông báo *@
+<div class="notification-container">
+    <button class="icon-btn" id="notification-toggle" title="Thông báo">
+        <i class="fas fa-bell"></i>
+        @if (Model.IsLoggedIn && Model.NotificationCount > 0)
+        {
+            <span class="badge">@(Model.NotificationCount > 99 ? "99+" : Model.NotificationCount.ToString())</span>
+        }
+    </button>
+
+    <div class="notification-menu" id="notification-menu">
+        @if (Model.IsLoggedIn)
+        {
+            <div class="notification-header">
+                <h3>Thông báo</h3>
+                <span class="notification-count">@Model.NotificationCount chưa đọc</span>
+            </div>
+            <div class="notification-list">
+                @if (Model.Notifications != null && Model.Notifications.Any())
+                {
+                    foreach (var notification in Model.Notifications)
+                    {
+                        <div class="notification-item @(notification.IsRead ? "read" : "unread")"
+                             data-id="@notification.Id"
+                             onclick="showNotificationDetail(@notification.Id)">
+                            <div class="notification-title">@notification.Title</div>
+                            <div class="notification-content">@notification.Content</div>
+                            <div class="notification-time">@notification.CreatedDate.ToString("dd/MM/yyyy HH:mm")</div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="empty-state">
+                        <i class="fas fa-bell-slash"></i>
+                        <p>Bạn chưa có thông báo nào</p>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="empty-state">
+                <i class="fas fa-bell"></i>
+                <p>Bạn chưa có thông báo nào, vui lòng đăng nhập để nhận thêm các thông báo nhé!</p>
+                <a href="/Account/Login" class="btn-primary">Đăng nhập ngay</a>
+            </div>
+        }
+    </div>
+</div>
+
+@* Giỏ hàng *@
+<div class="cart-container">
+    <button class="icon-btn" id="cart-toggle" title="Giỏ hàng">
+        <i class="fas fa-shopping-cart"></i>
+        @if (Model.IsLoggedIn && Model.CartCount > 0)
+        {
+            <span class="badge">@(Model.CartCount > 99 ? "99+" : Model.CartCount.ToString())</span>
+        }
+    </button>
+
+    <div class="cart-menu" id="cart-menu">
+        @if (Model.IsLoggedIn)
+        {
+            <div class="cart-header">
+                <h3>Giỏ hàng của bạn</h3>
+                <span class="cart-count">@Model.CartCount sản phẩm</span>
+            </div>
+            <div class="cart-list">
+                @if (Model.CartItems != null && Model.CartItems.Any())
+                {
+                    foreach (var item in Model.CartItems)
+                    {
+                        <div class="cart-item" data-id="@item.ProductId" onclick="toggleCartItem(this)">
+                            <input type="checkbox" class="cart-checkbox" data-price="@item.Price" onclick="event.stopPropagation(); updateCartTotal();">
+                            <img src="@item.ImageUrl" alt="@item.ProductName" class="cart-item-image">
+                            <div class="cart-item-info">
+                                <div class="cart-item-name">@item.ProductName</div>
+                                <div class="cart-item-price">@item.Price.ToString("N0") đ</div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="empty-state">
+                        <i class="fas fa-shopping-cart"></i>
+                        <p>Giỏ hàng của bạn đang trống</p>
+                    </div>
+                }
+            </div>
+            if (Model.CartItems != null && Model.CartItems.Any())
+            {
+                <div class="cart-footer">
+                    <div class="cart-footer-row">
+                        <label class="cart-select-all">
+                            <input type="checkbox" id="select-all-cart" onchange="toggleAllCartItems()">
+                            <span>Chọn tất cả</span>
+                        </label>
+                        <div class="cart-total">
+                            <span>Tổng:</span>
+                            <span class="cart-total-price" id="cart-total-price">0 đ</span>
+                        </div>
+                    </div>
+                    <button class="btn-checkout" onclick="proceedToCheckout()">
+                        <i class="fas fa-credit-card"></i> Mua hàng
+                    </button>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="empty-state">
+                <i class="fas fa-shopping-cart"></i>
+                <p>Vui lòng đăng nhập hoặc đăng ký để bắt đầu mua sắm hoặc xem thông tin giỏ hàng</p>
+                <div class="empty-state-actions">
+                    <a href="/Account/Login" class="btn-primary">Đăng nhập</a>
+                    <a href="/Account/Register" class="btn-secondary">Đăng ký</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@* Avatar và menu người dùng *@
+<div class="user-avatar-container">
+    <div class="user-avatar" id="user-avatar-toggle" title="Tài khoản" style="cursor: pointer;">
+        <i class="fas fa-user"></i>
+    </div>
+    <div class="user-menu" id="user-menu">
+        @if (Model.IsLoggedIn)
+        {
+            if (Model.UserRole.ToLower() == "admin")
+            {
+                <a href="~/Manager/Dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <div class="user-menu-divider"></div>
+                <a href="~/Account/Logout"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+            }
+            else
+            {
+                <a href="~/Account/Profile"><i class="fas fa-user-circle"></i> Thông tin cá nhân</a>
+                <a href="~/Account/OrderHistory"><i class="fas fa-history"></i> Lịch sử đơn hàng</a>
+                <div class="user-menu-divider"></div>
+                <a href="~/Account/Logout"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+            }
+        }
+        else
+        {
+            <a href="~/Account/Login"><i class="fas fa-sign-in-alt"></i> Đăng nhập</a>
+            <a href="~/Account/Register"><i class="fas fa-user-plus"></i> Đăng ký</a>
+        }
+    </div>
+</div>
+
+@* Modal chi tiết thông báo *@
+<div class="notification-detail-overlay" id="notification-detail-overlay" onclick="closeNotificationDetail()">
+    <div class="notification-detail-modal" onclick="event.stopPropagation()">
+        <button class="modal-close" onclick="closeNotificationDetail()">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="modal-content" id="notification-detail-content">
+            <!-- Content will be loaded dynamically -->
+        </div>
+    </div>
+</div>

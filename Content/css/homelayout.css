@@ -507,7 +507,9 @@ body {
     .header-content {
         padding: 0.8rem;
     }
-
+    .sidebar-link{
+        pointer-events:none;
+    }
     .logo {
         font-size: 1.2rem;
     }
@@ -540,3 +542,59 @@ body {
     .sidebar::-webkit-scrollbar-thumb:hover {
         background: var(--accent);
     }
+/* Avatar & Dropdown Menu */
+.user-avatar-container {
+    position: relative;
+    display:inline-block;
+}
+
+.user-menu {
+    position: absolute;
+    top: 110%;
+    right: 0;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px var(--shadow);
+    width: 220px;
+    padding: 0.5rem 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.25s ease;
+    z-index: 1100;
+    pointer-events:auto;
+}
+
+    .user-menu.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+
+    .user-menu a {
+        display: block;
+        padding: 0.75rem 1.2rem;
+        color: var(--text-primary);
+        text-decoration: none;
+        font-size: 0.95rem;
+        transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+        .user-menu a:hover {
+            background-color: var(--bg-tertiary);
+            color: var(--accent);
+        }
+        .user-menu a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+.user-menu-divider {
+    height: 1px;
+    margin: 0.5rem 0;
+    background-color: var(--border-color);
+}
+
+/*end*/

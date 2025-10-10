@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Titlet</title>
+    <title>@ViewBag.Title</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="~/Content/css/homelayout.css" rel="stylesheet" />
+    <link href="~/Content/css/header-user-style.css" rel="stylesheet" />
 </head>
 <body>
     <!-- Header -->
@@ -16,13 +17,13 @@
                 <button class="menu-toggle" id="menuToggle">
                     <i class="fas fa-bars"></i>
                 </button>
-                <a href="Home" class="logo">
+                <a href="~/home/index" class="logo">
                     <i class="fas fa-bolt"></i>
                     <span>TechStore</span>
                 </a>
                 <nav>
                     <ul class="nav-links">
-                        <li><a href="Index"><i class="fas fa-home"></i> Trang chủ</a></li>
+                        <li><a href="~/home/index"><i class="fas fa-home"></i> Trang chủ</a></li>
                         <li><a href="Contact"><i class="fas fa-envelope"></i> Liên hệ</a></li>
                         <li><a href="About"><i class="fas fa-info-circle"></i> Về chúng tôi</a></li>
                     </ul>
@@ -36,17 +37,7 @@
                 <button class="icon-btn" id="themeToggle" title="Chuyển đổi giao diện">
                     <i class="fas fa-moon"></i>
                 </button>
-                <button class="icon-btn" title="Giỏ hàng">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span class="badge">3</span>
-                </button>
-                <button class="icon-btn" title="Thông báo">
-                    <i class="fas fa-bell"></i>
-                    <span class="badge">5</span>
-                </button>
-                <div class="user-avatar" title="Tài khoản">
-                    <a href="/Account/Login"><i class="fas fa-user"></i></a>
-                </div>
+                @Html.Action("HeaderUserData", "Home")
             </div>
         </div>
 
@@ -144,5 +135,6 @@
         </div>
     </main>
     <script src="~/Scripts/self/cusstom.js"></script>
+    <script src="~/Scripts/self/headeruserdata.js"></script>
 </body>
 </html>

@@ -72,6 +72,19 @@
       <Association Name="User_chat_session1" Member="User1" ThisKey="ID_user" OtherKey="ID_user" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.Notifications" Member="Notifications">
+    <Type Name="Notification">
+      <Column Name="Notification_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ID_user" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Message" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Type" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Related_ID" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="IsRead" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Created_At" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="User_Notification" Member="User" ThisKey="ID_user" OtherKey="ID_user" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.Orders" Member="Orders">
     <Type Name="Order">
       <Column Name="Order_ID" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -206,6 +219,7 @@
       <Association Name="User_chat_message" Member="chat_messages" ThisKey="ID_user" OtherKey="SenderID" Type="chat_message" />
       <Association Name="User_chat_session" Member="chat_sessions" ThisKey="ID_user" OtherKey="SupportID" Type="chat_session" />
       <Association Name="User_chat_session1" Member="chat_sessions1" ThisKey="ID_user" OtherKey="ID_user" Type="chat_session" />
+      <Association Name="User_Notification" Member="Notifications" ThisKey="ID_user" OtherKey="ID_user" Type="Notification" />
       <Association Name="User_Order" Member="Orders" ThisKey="ID_user" OtherKey="ID_user" Type="Order" />
       <Association Name="User_product_import" Member="product_imports" ThisKey="ID_user" OtherKey="ID_user" Type="product_import" />
       <Association Name="User_shopping_cart" Member="shopping_carts" ThisKey="ID_user" OtherKey="ID_user" Type="shopping_cart" />

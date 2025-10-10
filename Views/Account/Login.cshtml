@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Đăng nhập";
     Layout = null;
 }
@@ -10,7 +9,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <style>
+        :root {
+            --text-primary: #333;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -56,6 +60,27 @@
             color: white;
             padding: 30px;
             text-align: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo i {
+            font-size: 2rem;
         }
 
         .card-header h1 {
@@ -197,6 +222,7 @@
             cursor: pointer;
             transition: all 0.3s;
             box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            margin-bottom: 12px;
         }
 
         .btn-login:hover {
@@ -212,6 +238,33 @@
             opacity: 0.6;
             cursor: not-allowed;
             transform: none;
+        }
+
+        .btn-back-home {
+            width: 100%;
+            padding: 14px;
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-back-home:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-back-home:active {
+            transform: translateY(0);
         }
 
         .card-footer {
@@ -241,6 +294,15 @@
                 padding: 24px 20px;
             }
 
+            .logo {
+                font-size: 1.3rem;
+                margin-bottom: 16px;
+            }
+
+            .logo i {
+                font-size: 1.8rem;
+            }
+
             .card-header h1 {
                 font-size: 24px;
             }
@@ -259,6 +321,14 @@
         }
 
         @@media (max-width: 360px) {
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            .logo i {
+                font-size: 1.6rem;
+            }
+
             .card-header h1 {
                 font-size: 22px;
             }
@@ -268,7 +338,8 @@
                 font-size: 14px;
             }
 
-            .btn-login {
+            .btn-login,
+            .btn-back-home {
                 padding: 12px;
                 font-size: 15px;
             }
@@ -279,6 +350,10 @@
     <div class="login-container">
         <div class="login-card">
             <div class="card-header">
+                <a href="Home" class="logo">
+                    <i class="fas fa-bolt"></i>
+                    <span>TechStore</span>
+                </a>
                 <h1>Đăng nhập</h1>
                 <p>Chào mừng bạn quay trở lại!</p>
             </div>
@@ -330,6 +405,10 @@
                     <button type="submit" class="btn-login" id="btnLogin">
                         Đăng nhập
                     </button>
+
+                    <a href="Home" class="btn-back-home">
+                        <i class="fas fa-home"></i> Quay lại trang chủ
+                    </a>
                 </form>
             </div>
 
@@ -340,7 +419,7 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const form = document.getElementById('loginForm');
             const usernameInput = document.getElementById('username');
             const passwordInput = document.getElementById('password');
@@ -349,16 +428,16 @@
             const validationList = document.getElementById('validationList');
 
             // Xóa lỗi khi người dùng nhập
-            usernameInput.addEventListener('input', function() {
+            usernameInput.addEventListener('input', function () {
                 clearError('username');
             });
 
-            passwordInput.addEventListener('input', function() {
+            passwordInput.addEventListener('input', function () {
                 clearError('password');
             });
 
             // Xử lý submit form
-            form.addEventListener('submit', function(e) {
+            form.addEventListener('submit', function (e) {
                 e.preventDefault();
 
                 // Reset validation
@@ -438,7 +517,7 @@
 
             function showValidationSummary(errors) {
                 validationList.innerHTML = '';
-                errors.forEach(function(error) {
+                errors.forEach(function (error) {
                     const li = document.createElement('li');
                     li.textContent = error;
                     validationList.appendChild(li);

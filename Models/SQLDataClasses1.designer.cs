@@ -48,6 +48,9 @@ namespace Web_Beta_ver2.Models
     partial void Insertchat_session(chat_session instance);
     partial void Updatechat_session(chat_session instance);
     partial void Deletechat_session(chat_session instance);
+    partial void InsertNotification(Notification instance);
+    partial void UpdateNotification(Notification instance);
+    partial void DeleteNotification(Notification instance);
     partial void InsertOrder(Order instance);
     partial void UpdateOrder(Order instance);
     partial void DeleteOrder(Order instance);
@@ -81,9 +84,13 @@ namespace Web_Beta_ver2.Models
     partial void InsertUser(User instance);
     partial void UpdateUser(User instance);
     partial void DeleteUser(User instance);
-    #endregion
-		
-		public SQLDataClassesDataContext(string connection) : 
+        #endregion
+        public SQLDataClassesDataContext() :
+                base("Data Source=LAPTOP-MI8BCIFM;Initial Catalog=My_Website;Integrated Security=True;", mappingSource)
+        {
+            OnCreated();
+        }
+        public SQLDataClassesDataContext(string connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
@@ -152,6 +159,14 @@ namespace Web_Beta_ver2.Models
 			get
 			{
 				return this.GetTable<chat_session>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Notification> Notifications
+		{
+			get
+			{
+				return this.GetTable<Notification>();
 			}
 		}
 		
@@ -1793,6 +1808,277 @@ namespace Web_Beta_ver2.Models
 		{
 			this.SendPropertyChanging();
 			entity.chat_session = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Notifications")]
+	public partial class Notification : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Notification_ID;
+		
+		private int _ID_user;
+		
+		private string _Title;
+		
+		private string _Message;
+		
+		private string _Type;
+		
+		private string _Related_ID;
+		
+		private System.Nullable<bool> _IsRead;
+		
+		private System.Nullable<System.DateTime> _Created_At;
+		
+		private EntityRef<User> _User;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnNotification_IDChanging(int value);
+    partial void OnNotification_IDChanged();
+    partial void OnID_userChanging(int value);
+    partial void OnID_userChanged();
+    partial void OnTitleChanging(string value);
+    partial void OnTitleChanged();
+    partial void OnMessageChanging(string value);
+    partial void OnMessageChanged();
+    partial void OnTypeChanging(string value);
+    partial void OnTypeChanged();
+    partial void OnRelated_IDChanging(string value);
+    partial void OnRelated_IDChanged();
+    partial void OnIsReadChanging(System.Nullable<bool> value);
+    partial void OnIsReadChanged();
+    partial void OnCreated_AtChanging(System.Nullable<System.DateTime> value);
+    partial void OnCreated_AtChanged();
+    #endregion
+		
+		public Notification()
+		{
+			this._User = default(EntityRef<User>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Notification_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Notification_ID
+		{
+			get
+			{
+				return this._Notification_ID;
+			}
+			set
+			{
+				if ((this._Notification_ID != value))
+				{
+					this.OnNotification_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Notification_ID = value;
+					this.SendPropertyChanged("Notification_ID");
+					this.OnNotification_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_user", DbType="Int NOT NULL")]
+		public int ID_user
+		{
+			get
+			{
+				return this._ID_user;
+			}
+			set
+			{
+				if ((this._ID_user != value))
+				{
+					if (this._User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnID_userChanging(value);
+					this.SendPropertyChanging();
+					this._ID_user = value;
+					this.SendPropertyChanged("ID_user");
+					this.OnID_userChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Title", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string Title
+		{
+			get
+			{
+				return this._Title;
+			}
+			set
+			{
+				if ((this._Title != value))
+				{
+					this.OnTitleChanging(value);
+					this.SendPropertyChanging();
+					this._Title = value;
+					this.SendPropertyChanged("Title");
+					this.OnTitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Message", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string Message
+		{
+			get
+			{
+				return this._Message;
+			}
+			set
+			{
+				if ((this._Message != value))
+				{
+					this.OnMessageChanging(value);
+					this.SendPropertyChanging();
+					this._Message = value;
+					this.SendPropertyChanged("Message");
+					this.OnMessageChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type", DbType="NVarChar(50)")]
+		public string Type
+		{
+			get
+			{
+				return this._Type;
+			}
+			set
+			{
+				if ((this._Type != value))
+				{
+					this.OnTypeChanging(value);
+					this.SendPropertyChanging();
+					this._Type = value;
+					this.SendPropertyChanged("Type");
+					this.OnTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Related_ID", DbType="VarChar(20)")]
+		public string Related_ID
+		{
+			get
+			{
+				return this._Related_ID;
+			}
+			set
+			{
+				if ((this._Related_ID != value))
+				{
+					this.OnRelated_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Related_ID = value;
+					this.SendPropertyChanged("Related_ID");
+					this.OnRelated_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsRead", DbType="Bit")]
+		public System.Nullable<bool> IsRead
+		{
+			get
+			{
+				return this._IsRead;
+			}
+			set
+			{
+				if ((this._IsRead != value))
+				{
+					this.OnIsReadChanging(value);
+					this.SendPropertyChanging();
+					this._IsRead = value;
+					this.SendPropertyChanged("IsRead");
+					this.OnIsReadChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Created_At", DbType="DateTime")]
+		public System.Nullable<System.DateTime> Created_At
+		{
+			get
+			{
+				return this._Created_At;
+			}
+			set
+			{
+				if ((this._Created_At != value))
+				{
+					this.OnCreated_AtChanging(value);
+					this.SendPropertyChanging();
+					this._Created_At = value;
+					this.SendPropertyChanged("Created_At");
+					this.OnCreated_AtChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Notification", Storage="_User", ThisKey="ID_user", OtherKey="ID_user", IsForeignKey=true)]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.Notifications.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.Notifications.Add(this);
+						this._ID_user = value.ID_user;
+					}
+					else
+					{
+						this._ID_user = default(int);
+					}
+					this.SendPropertyChanged("User");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 	
@@ -4474,6 +4760,8 @@ namespace Web_Beta_ver2.Models
 		
 		private EntitySet<chat_session> _chat_sessions1;
 		
+		private EntitySet<Notification> _Notifications;
+		
 		private EntitySet<Order> _Orders;
 		
 		private EntitySet<product_import> _product_imports;
@@ -4504,6 +4792,7 @@ namespace Web_Beta_ver2.Models
 			this._chat_messages = new EntitySet<chat_message>(new Action<chat_message>(this.attach_chat_messages), new Action<chat_message>(this.detach_chat_messages));
 			this._chat_sessions = new EntitySet<chat_session>(new Action<chat_session>(this.attach_chat_sessions), new Action<chat_session>(this.detach_chat_sessions));
 			this._chat_sessions1 = new EntitySet<chat_session>(new Action<chat_session>(this.attach_chat_sessions1), new Action<chat_session>(this.detach_chat_sessions1));
+			this._Notifications = new EntitySet<Notification>(new Action<Notification>(this.attach_Notifications), new Action<Notification>(this.detach_Notifications));
 			this._Orders = new EntitySet<Order>(new Action<Order>(this.attach_Orders), new Action<Order>(this.detach_Orders));
 			this._product_imports = new EntitySet<product_import>(new Action<product_import>(this.attach_product_imports), new Action<product_import>(this.detach_product_imports));
 			this._shopping_carts = new EntitySet<shopping_cart>(new Action<shopping_cart>(this.attach_shopping_carts), new Action<shopping_cart>(this.detach_shopping_carts));
@@ -4663,6 +4952,19 @@ namespace Web_Beta_ver2.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Notification", Storage="_Notifications", ThisKey="ID_user", OtherKey="ID_user")]
+		public EntitySet<Notification> Notifications
+		{
+			get
+			{
+				return this._Notifications;
+			}
+			set
+			{
+				this._Notifications.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Order", Storage="_Orders", ThisKey="ID_user", OtherKey="ID_user")]
 		public EntitySet<Order> Orders
 		{
@@ -4797,6 +5099,18 @@ namespace Web_Beta_ver2.Models
 		{
 			this.SendPropertyChanging();
 			entity.User1 = null;
+		}
+		
+		private void attach_Notifications(Notification entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_Notifications(Notification entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
 		}
 		
 		private void attach_Orders(Order entity)

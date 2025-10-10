@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using Web_Beta.Models;
+using Web_Beta_ver2.Models;
 
 namespace Web_Beta.Controllers
 {

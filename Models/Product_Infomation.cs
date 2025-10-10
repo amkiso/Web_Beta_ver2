@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Web;
 
-namespace Web_Beta.Models
+namespace Web_Beta_ver2.Models
 {
     public class Product_Infomation 
     {

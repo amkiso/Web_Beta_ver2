@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 
 
-namespace Web_Beta.Models
+namespace Web_Beta_ver2.Models
 {
     public class Xuly  
     {
@@ -33,6 +33,134 @@ namespace Web_Beta.Models
                         };
             return query.ToList();
         }
+        public bool VerifyPassword(string inputPassword, string storedPassword)
+        {
+            return HashPassword(inputPassword) == storedPassword;
+        }
+        public string HashPassword(string password)
+        {
+            using (var sha256 = System.Security.Cryptography.SHA256.Create())
+            {
+                var bytes = System.Text.Encoding.UTF8.GetBytes(password);
+                var hash = sha256.ComputeHash(bytes);
+                return Convert.ToBase64String(hash);
+            }
+        }
+        public shopping_cart GetOrCreateCart(int userId)
+        {
+            var cart = da.shopping_carts.FirstOrDefault(c => c.ID_user == userId);
 
+            if (cart == null)
+            {
+                cart = new shopping_cart
+                {
+                    ID_user = userId,
+                    day_create = DateTime.Now,
+                    update_at = DateTime.Now
+                };
+                da.shopping_carts.InsertOnSubmit(cart);
+                da.SubmitChanges();
+            }
+
+            return cart;
+        }
+        // Lấy số lượng thông báo chưa đọc
+        public int GetUnreadNotificationCount(int userId)
+        {
+            try
+            {
+                return da.Notifications
+                    .Where(n => n.ID_user == userId && n.IsRead == false)
+                    .Count();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Error in GetUnreadNotificationCount: " + ex.Message);
+                return 0;
+            }
+        }
+
+        // Lấy danh sách thông báo
+        public List<NotificationItem> GetUserNotifications(int userId, int count)
+        {
+            try
+            {
+                return da.Notifications
+                    .Where(n => n.ID_user == userId)
+                    .OrderByDescending(n => n.Created_At)
+                    .Take(count)
+                    .Select(n => new NotificationItem
+                    {
+                        Id = n.Notification_ID,
+                        Title = n.Title,
+                        Content = n.Message,
+                        IsRead = n.IsRead ?? false,
+                        CreatedDate = n.Created_At ?? DateTime.Now,
+                        Type = n.Type,
+                        RelatedId = n.Related_ID
+                    })
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Error in GetUserNotifications: " + ex.Message);
+                return new List<NotificationItem>();
+            }
+        }
+
+        // Lấy số lượng sản phẩm trong giỏ hàng
+        public int GetCartItemCount(int userId)
+        {
+            try
+            {
+                var cart = da.shopping_carts
+                    .FirstOrDefault(c => c.ID_user == userId);
+
+                if (cart == null)
+                    return 0;
+
+                return da.cart_items
+                    .Where(ci => ci.cart_ID == cart.cart_ID)
+                    .Count();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Error in GetCartItemCount: " + ex.Message);
+                return 0;
+            }
+        }
+
+        // Lấy danh sách sản phẩm trong giỏ hàng
+        public List<CartItem> GetCartItems(int userId)
+        {
+            try
+            {
+                var cart = da.shopping_carts
+                    .FirstOrDefault(c => c.ID_user == userId);
+
+                if (cart == null)
+                    return new List<CartItem>();
+
+                List<CartItem> cartItems = (from ci in da.cart_items
+                                 where ci.cart_ID == cart.cart_ID
+                                 join p in da.Products on ci.Product_ID equals p.Product_ID
+                                 select new CartItem
+                                 {
+                                     CartItemId = ci.cart_item_ID,
+                                     ProductId = p.Product_ID,
+                                     ProductName = p.Product_name,
+                                     ImageUrl = p.Product_Image,
+                                     Price = ci.Sale_Price ?? p.Sale_Price ?? 0,
+                                     Quantity = ci.quantity ?? 1
+                                 }).ToList();
+
+                return cartItems;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Error in GetCartItems: " + ex.Message);
+                return new List<CartItem>();
+            }
+        }
     }
 }

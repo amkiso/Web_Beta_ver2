@@ -66,4 +66,29 @@
         }
 
     window.addEventListener('resize', handleResize);
-    handleResize();
+handleResize();
+//ở _Layout.cshtml
+document.addEventListener('DOMContentLoaded', () => {
+    const avatarToggle = document.getElementById('user-avatar-toggle');
+    const userMenu = document.getElementById('user-menu');
+
+    if (!avatarToggle || !userMenu) return;
+
+    // Toggle hiển thị khi click avatar
+    avatarToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        userMenu.classList.toggle('active');
+    });
+
+    // Ẩn menu khi click bên ngoài
+    document.addEventListener('click', (e) => {
+        if (!userMenu.contains(e.target) && !avatarToggle.contains(e.target)) {
+            userMenu.classList.remove('active');
+        }
+    });
+
+    // Đóng menu khi resize (đề phòng lỗi layout)
+    window.addEventListener('resize', () => {
+        userMenu.classList.remove('active');
+    });
+});
