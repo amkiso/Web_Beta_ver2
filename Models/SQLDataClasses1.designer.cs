@@ -84,7 +84,11 @@ namespace Web_Beta_ver2.Models
     partial void InsertUser(User instance);
     partial void UpdateUser(User instance);
     partial void DeleteUser(User instance);
+    partial void Insertslide(slide instance);
+    partial void Updateslide(slide instance);
+    partial void Deleteslide(slide instance);
         #endregion
+
         public SQLDataClassesDataContext() :
                 base("Data Source=LAPTOP-MI8BCIFM;Initial Catalog=My_Website;Integrated Security=True;", mappingSource)
         {
@@ -255,6 +259,14 @@ namespace Web_Beta_ver2.Models
 			get
 			{
 				return this.GetTable<User>();
+			}
+		}
+		
+		public System.Data.Linq.Table<slide> slides
+		{
+			get
+			{
+				return this.GetTable<slide>();
 			}
 		}
 	}
@@ -3516,6 +3528,8 @@ namespace Web_Beta_ver2.Models
 		
 		private EntitySet<product_import> _product_imports;
 		
+		private EntitySet<slide> _slides;
+		
 		private EntityRef<supplier> _supplier;
 		
 		private EntityRef<Type_Product> _Type_Product;
@@ -3549,6 +3563,7 @@ namespace Web_Beta_ver2.Models
 			this._cart_items = new EntitySet<cart_item>(new Action<cart_item>(this.attach_cart_items), new Action<cart_item>(this.detach_cart_items));
 			this._Orders_items = new EntitySet<Orders_item>(new Action<Orders_item>(this.attach_Orders_items), new Action<Orders_item>(this.detach_Orders_items));
 			this._product_imports = new EntitySet<product_import>(new Action<product_import>(this.attach_product_imports), new Action<product_import>(this.detach_product_imports));
+			this._slides = new EntitySet<slide>(new Action<slide>(this.attach_slides), new Action<slide>(this.detach_slides));
 			this._supplier = default(EntityRef<supplier>);
 			this._Type_Product = default(EntityRef<Type_Product>);
 			OnCreated();
@@ -3781,6 +3796,19 @@ namespace Web_Beta_ver2.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_slide", Storage="_slides", ThisKey="Product_ID", OtherKey="Product_ID")]
+		public EntitySet<slide> slides
+		{
+			get
+			{
+				return this._slides;
+			}
+			set
+			{
+				this._slides.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="supplier_Product", Storage="_supplier", ThisKey="supplier_ID", OtherKey="supplier_ID", IsForeignKey=true)]
 		public supplier supplier
 		{
@@ -3900,6 +3928,18 @@ namespace Web_Beta_ver2.Models
 		}
 		
 		private void detach_product_imports(product_import entity)
+		{
+			this.SendPropertyChanging();
+			entity.Product = null;
+		}
+		
+		private void attach_slides(slide entity)
+		{
+			this.SendPropertyChanging();
+			entity.Product = this;
+		}
+		
+		private void detach_slides(slide entity)
 		{
 			this.SendPropertyChanging();
 			entity.Product = null;
@@ -5147,6 +5187,181 @@ namespace Web_Beta_ver2.Models
 		{
 			this.SendPropertyChanging();
 			entity.User = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.slide")]
+	public partial class slide : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Slide_ID;
+		
+		private System.Nullable<int> _Product_ID;
+		
+		private string _img;
+		
+		private System.Nullable<bool> _status;
+		
+		private EntityRef<Product> _Product;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnSlide_IDChanging(int value);
+    partial void OnSlide_IDChanged();
+    partial void OnProduct_IDChanging(System.Nullable<int> value);
+    partial void OnProduct_IDChanged();
+    partial void OnimgChanging(string value);
+    partial void OnimgChanged();
+    partial void OnstatusChanging(System.Nullable<bool> value);
+    partial void OnstatusChanged();
+    #endregion
+		
+		public slide()
+		{
+			this._Product = default(EntityRef<Product>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Slide_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Slide_ID
+		{
+			get
+			{
+				return this._Slide_ID;
+			}
+			set
+			{
+				if ((this._Slide_ID != value))
+				{
+					this.OnSlide_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Slide_ID = value;
+					this.SendPropertyChanged("Slide_ID");
+					this.OnSlide_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Product_ID", DbType="Int")]
+		public System.Nullable<int> Product_ID
+		{
+			get
+			{
+				return this._Product_ID;
+			}
+			set
+			{
+				if ((this._Product_ID != value))
+				{
+					if (this._Product.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnProduct_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Product_ID = value;
+					this.SendPropertyChanged("Product_ID");
+					this.OnProduct_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_img", DbType="VarChar(255)")]
+		public string img
+		{
+			get
+			{
+				return this._img;
+			}
+			set
+			{
+				if ((this._img != value))
+				{
+					this.OnimgChanging(value);
+					this.SendPropertyChanging();
+					this._img = value;
+					this.SendPropertyChanged("img");
+					this.OnimgChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_status", DbType="Bit")]
+		public System.Nullable<bool> status
+		{
+			get
+			{
+				return this._status;
+			}
+			set
+			{
+				if ((this._status != value))
+				{
+					this.OnstatusChanging(value);
+					this.SendPropertyChanging();
+					this._status = value;
+					this.SendPropertyChanged("status");
+					this.OnstatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_slide", Storage="_Product", ThisKey="Product_ID", OtherKey="Product_ID", IsForeignKey=true)]
+		public Product Product
+		{
+			get
+			{
+				return this._Product.Entity;
+			}
+			set
+			{
+				Product previousValue = this._Product.Entity;
+				if (((previousValue != value) 
+							|| (this._Product.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Product.Entity = null;
+						previousValue.slides.Remove(this);
+					}
+					this._Product.Entity = value;
+					if ((value != null))
+					{
+						value.slides.Add(this);
+						this._Product_ID = value.Product_ID;
+					}
+					else
+					{
+						this._Product_ID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Product");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

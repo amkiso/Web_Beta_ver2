@@ -162,6 +162,7 @@
       <Association Name="Product_cart_item" Member="cart_items" ThisKey="Product_ID" OtherKey="Product_ID" Type="cart_item" />
       <Association Name="Product_Orders_item" Member="Orders_items" ThisKey="Product_ID" OtherKey="Product_ID" Type="Orders_item" />
       <Association Name="Product_product_import" Member="product_imports" ThisKey="Product_ID" OtherKey="product_id" Type="product_import" />
+      <Association Name="Product_slide" Member="slides" ThisKey="Product_ID" OtherKey="Product_ID" Type="slide" />
       <Association Name="supplier_Product" Member="supplier" ThisKey="supplier_ID" OtherKey="supplier_ID" Type="supplier" IsForeignKey="true" />
       <Association Name="Type_Product_Product" Member="Type_Product" ThisKey="Type_Product_ID" OtherKey="Type_Product_ID" Type="Type_Product" IsForeignKey="true" />
     </Type>
@@ -224,6 +225,15 @@
       <Association Name="User_product_import" Member="product_imports" ThisKey="ID_user" OtherKey="ID_user" Type="product_import" />
       <Association Name="User_shopping_cart" Member="shopping_carts" ThisKey="ID_user" OtherKey="ID_user" Type="shopping_cart" />
       <Association Name="User_User_detail" Member="User_detail" ThisKey="ID_user" OtherKey="ID_user" Type="User_detail" Cardinality="One" />
+    </Type>
+  </Table>
+  <Table Name="dbo.slide" Member="slides">
+    <Type Name="slide">
+      <Column Name="Slide_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Product_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="img" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="Product_slide" Member="Product" ThisKey="Product_ID" OtherKey="Product_ID" Type="Product" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
