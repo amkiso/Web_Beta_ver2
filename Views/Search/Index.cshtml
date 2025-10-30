@@ -1,0 +1,189 @@
+﻿@model Web_Beta_ver2.Models.SearchResultViewModel
+
+@{
+    ViewBag.Title = $"Kết quả tìm kiếm: {Model.SearchTerm}";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/css/product-filter.css" rel="stylesheet" />
+<link href="~/Content/css/Searchbox.css" rel="stylesheet" />
+<div class="products-container">
+    <!-- Search Results Header -->
+    <div class="search-results-header">
+        <h1 class="search-results-title">
+            Kết quả tìm kiếm: <span class="search-term">"@Model.SearchTerm"</span>
+        </h1>
+        <div class="search-results-info">
+            @if (Model.TotalResults > 0)
+            {
+                <span>Tìm thấy <strong>@Model.TotalResults</strong> sản phẩm</span>
+            }
+            else
+            {
+                <span>Không tìm thấy kết quả phù hợp</span>
+            }
+        </div>
+    </div>
+
+    @if (Model.Products != null && Model.Products.Any())
+    {
+        <!-- Product Grid -->
+        <div class="product-grid" id="productGrid">
+            @foreach (var product in Model.Products)
+            {
+                <div class="product-card">
+                    @if (product.is_new)
+                    {
+                        <div class="product-badge badge-new">Mới</div>
+                    }
+                    @if (product.DiscountPercent > 0)
+                    {
+                        <div class="product-badge badge-discount">-@product.DiscountPercent%</div>
+                    }
+
+                    <a href="@Url.Action("ProductDetail", "Products", new { id = product.product_id })">
+                        <img src="~/Content/Pic/images/@product.images"
+                             alt="@product.product_name"
+                             class="product-image"
+                             onerror="this.src='~/Content/Pic/images/no-image.jpg'">
+                    </a>
+
+                    <div class="product-content">
+                        <h3 class="product-name">
+                            <a href="@Url.Action("ProductDetail", "Products", new { id = product.product_id })"
+                               style="text-decoration: none; color: inherit;">
+                                @product.product_name
+                            </a>
+                        </h3>
+
+                        <div class="product-price-section">
+                            <div class="product-price">@product.sale_price.ToString("N0") ₫</div>
+                            @if (product.original_price > product.sale_price)
+                            {
+                                <div class="product-original-price">@product.original_price.ToString("N0") ₫</div>
+                            }
+                        </div>
+
+                        <div class="product-meta">
+                            <span class="product-category">
+                                <i class="fas fa-tag"></i> @product.type_product
+                            </span>
+                            @if (!string.IsNullOrEmpty(product.supplier_name))
+                            {
+                                <span class="product-supplier">
+                                    <i class="fas fa-store"></i> @product.supplier_name
+                                </span>
+                            }
+                        </div>
+
+                        <div class="product-actions">
+                            <button class="btn btn-add-cart"
+                                    data-product-id="@product.product_id"
+                                    onclick="addToCart(@product.product_id)">
+                                <i class="fas fa-cart-plus"></i> Thêm giỏ hàng
+                            </button>
+                            <button class="btn btn-buy-now"
+                                    data-product-id="@product.product_id"
+                                    onclick="buyNow(@product.product_id)"
+                                    title="Mua ngay">
+                                <i class="fas fa-bolt"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- Pagination -->
+        if (Model.TotalPages > 1)
+        {
+            <div class="pagination-container">
+                <div class="pagination">
+                    @if (Model.CurrentPage > 1)
+                    {
+                        <a href="@Url.Action("Index", new { q = Model.SearchTerm, page = Model.CurrentPage - 1 })"
+                           class="pagination-btn">
+                            <i class="fas fa-chevron-left"></i> Trước
+                        </a>
+                    }
+
+                    @for (int i = 1; i <= Model.TotalPages; i++)
+                    {
+                        if (i == Model.CurrentPage)
+                        {
+                            <span class="pagination-number active">@i</span>
+                        }
+                        else if (i == 1 || i == Model.TotalPages || (i >= Model.CurrentPage - 2 && i <= Model.CurrentPage + 2))
+                        {
+                            <a href="@Url.Action("Index", new { q = Model.SearchTerm, page = i })"
+                               class="pagination-number">@i</a>
+                        }
+                        else if (i == Model.CurrentPage - 3 || i == Model.CurrentPage + 3)
+                        {
+                            <span class="pagination-dots">...</span>
+                        }
+                    }
+
+                    @if (Model.CurrentPage < Model.TotalPages)
+                    {
+                        <a href="@Url.Action("Index", new { q = Model.SearchTerm, page = Model.CurrentPage + 1 })"
+                           class="pagination-btn">
+                            Sau <i class="fas fa-chevron-right"></i>
+                        </a>
+                    }
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <!-- No Results -->
+        <div class="search-no-results">
+            <div class="search-no-results-icon">
+                <i class="fas fa-search"></i>
+            </div>
+            <h3>Không tìm thấy sản phẩm phù hợp</h3>
+            <p>
+                Rất tiếc, chúng tôi không tìm thấy sản phẩm nào phù hợp với từ khóa
+                "<strong>@Model.SearchTerm</strong>".<br>
+                Vui lòng thử lại với từ khóa khác hoặc xem các gợi ý bên dưới.
+            </p>
+
+            <div class="search-suggestions">
+                <h4 style="width: 100%; text-align: center; margin-bottom: 1rem; color: var(--text-secondary);">
+                    Có thể bạn quan tâm:
+                </h4>
+                <a href="@Url.Action("SmartPhone", "Products")" class="search-suggestion-tag">
+                    <i class="fas fa-mobile-alt"></i> Điện thoại
+                </a>
+                <a href="@Url.Action("Laptop", "Products")" class="search-suggestion-tag">
+                    <i class="fas fa-laptop"></i> Laptop
+                </a>
+                <a href="@Url.Action("Index", "Search", new { q = "iPhone" })" class="search-suggestion-tag">
+                    iPhone
+                </a>
+                <a href="@Url.Action("Index", "Search", new { q = "Samsung" })" class="search-suggestion-tag">
+                    Samsung
+                </a>
+                <a href="@Url.Action("Index", "Search", new { q = "MacBook" })" class="search-suggestion-tag">
+                    MacBook
+                </a>
+                <a href="@Url.Action("Index", "Search", new { q = "Gaming" })" class="search-suggestion-tag">
+                    Gaming Laptop
+                </a>
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <a href="@Url.Action("Index", "Home")" class="btn-primary" style="text-decoration: none; padding: 0.8rem 2rem; display: inline-block;">
+                    <i class="fas fa-home"></i> Về trang chủ
+                </a>
+            </div>
+        </div>
+    }
+</div>
+
+<script src="~/Scripts/self/product_filter.js"></script>
+<script>
+    // Override product grid variable for search results
+    const typeProductId = null; // Search không cần filter theo type
+</script>

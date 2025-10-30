@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Web_beta_ver2.Models;
 using Web_Beta_ver2.Models;
 
 namespace Web_Beta.Controllers
@@ -16,12 +17,7 @@ namespace Web_Beta.Controllers
         {
             return View();
         }
-        public ActionResult Products()
-        {
-           
-            List<Product_Infomation> pr = xl.itemproduct();
-            return View(pr.Take(12));
-        }
+        
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -68,7 +64,28 @@ namespace Web_Beta.Controllers
 
             return PartialView("~/Views/Shared/HeaderUserData.cshtml", model);
         }
-       
+        // Thêm method này vào HomeController.cs của bạn
+
+        [HttpGet]
+        public JsonResult GetCartCount()
+        {
+            try
+            {
+                int count = 0;
+
+                if (Session["UserID"] != null)
+                {
+                    int userId = Convert.ToInt32(Session["UserID"]);
+                    count = xl.GetCartItemCount(userId);
+                }
+
+                return Json(new { count = count }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { count = 0, error = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
 
 
 

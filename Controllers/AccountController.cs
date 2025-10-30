@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Web_beta_ver2.Models;
 using Web_Beta_ver2.Models;
 
 
@@ -10,7 +11,8 @@ namespace Web_Beta.Controllers
 {
     public class AccountController : Controller
     {
-        /*private readonly */SQLDataClassesDataContext db = new SQLDataClassesDataContext();
+        /*private readonly */
+        SQLDataClassesDataContext db = new SQLDataClassesDataContext();
         Xuly xl = new Xuly();
         // GET: Account
         public ActionResult Login()

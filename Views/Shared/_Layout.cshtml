@@ -7,11 +7,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="~/Content/css/homelayout.css" rel="stylesheet" />
     <link href="~/Content/css/header-user-style.css" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/css/Searchbox.css")" rel="stylesheet" />
 </head>
 <body>
     <!-- Header -->
     <header class="header">
-
         <div class="header-content">
             <div class="header-left">
                 <button class="menu-toggle" id="menuToggle">
@@ -30,22 +30,56 @@
                 </nav>
             </div>
             <div class="header-right">
+                <!-- Search Box with Autocomplete -->
                 <div class="search-box">
-                    <input type="text" placeholder="Tìm kiếm sản phẩm...">
-                    <i class="fas fa-search"></i>
+                    <form id="search-form" action="@Url.Action("Index", "Search")" method="get">
+                        <input type="text"
+                               id="search-input"
+                               name="q"
+                               placeholder="Tìm kiếm sản phẩm..."
+                               autocomplete="off"
+                               maxlength="100">
+                        <i class="fas fa-times clear-icon"></i>
+                        <i class="fas fa-search search-icon" onclick="document.getElementById('search-form').submit()"></i>
+                    </form>
+                    <!-- Autocomplete Dropdown -->
+                    <div class="search-autocomplete" id="search-autocomplete">
+                        <!-- Results will be inserted here by JavaScript -->
+                    </div>
                 </div>
+
+                <!-- Mobile Search Button -->
+                <button class="icon-btn mobile-only" id="mobile-search-btn" title="Tìm kiếm">
+                    <i class="fas fa-search"></i>
+                </button>
+
                 <button class="icon-btn" id="themeToggle" title="Chuyển đổi giao diện">
                     <i class="fas fa-moon"></i>
                 </button>
                 @Html.Action("HeaderUserData", "Home")
             </div>
         </div>
-
     </header>
+
+    <!-- Mobile Search Overlay -->
+    <div class="mobile-search-overlay" id="mobile-search-overlay">
+        <div class="mobile-search-header">
+            <button class="mobile-search-close" id="mobile-search-close">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <input type="text"
+                   id="mobile-search-input"
+                   class="mobile-search-input"
+                   placeholder="Tìm kiếm sản phẩm..."
+                   autocomplete="off">
+        </div>
+        <div class="mobile-search-results">
+            <!-- Results will be inserted here -->
+        </div>
+    </div>
 
     <!-- Sidebar -->
     <aside class="sidebar" id="sidebar">
-
         <ul class="sidebar-menu">
             <li class="sidebar-item">
                 <a class="sidebar-link" id="sidebarToggle" title="Thu gọn sidebar" style="cursor:pointer;">
@@ -54,13 +88,13 @@
                 </a>
             </li>
             <li class="sidebar-item">
-                <a href="#" class="sidebar-link">
+                <a href="@Url.Action("SmartPhone","Products")" class="sidebar-link">
                     <i class="fas fa-mobile-alt"></i>
                     <span>Điện thoại</span>
                 </a>
             </li>
             <li class="sidebar-item">
-                <a href="#" class="sidebar-link">
+                <a href="@Url.Action("Laptop","Products")" class="sidebar-link">
                     <i class="fas fa-laptop"></i>
                     <span>Laptop</span>
                 </a>
@@ -123,18 +157,11 @@
 
     <!-- Main Content -->
     <main class="main-content" id="mainContent">
-        <h1>Chào mừng đến với TechStore</h1>
-        <p style="color: var(--text-secondary); margin-top: 1rem;">
-            Đây là khu vực nội dung chính của trang. Layout responsive và tối ưu cho mọi thiết bị.
-        </p>
-
-        <!-- Nội dung của bạn ở đây -->
-        <div style="margin-top: 2rem; padding: 2rem; background-color: var(--bg-secondary); border-radius: 12px;">
-            <h2>Thông tin sản phẩm</h2>
-            @RenderBody()
-        </div>
+        @RenderBody()
     </main>
+
     <script src="~/Scripts/self/cusstom.js"></script>
     <script src="~/Scripts/self/headeruserdata.js"></script>
+    <script src="~/Scripts/self/searchbox.js"></script>
 </body>
 </html>

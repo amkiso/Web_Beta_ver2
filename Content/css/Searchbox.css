@@ -1,0 +1,369 @@
+﻿/* ======================== */
+/* Search Box Styles        */
+/* ======================== */
+
+/* Sửa vị trí icon trong ô tìm kiếm */
+.search-box {
+    position: relative;
+}
+
+.search-box .search-icon {
+    position: absolute;
+    right: 0.8rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.search-box .search-icon:hover {
+    color: var(--accent);
+}
+
+/* Icon xóa nằm giữa input */
+.search-box .clear-icon {
+    position: absolute;
+    right: 2.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: none;
+    transition: color 0.3s ease;
+}
+
+.search-box .clear-icon:hover {
+    color: var(--accent);
+}
+
+/* Khi input có nội dung thì hiển thị nút clear */
+.search-box input:not(:placeholder-shown) ~ .clear-icon {
+    display: block;
+}
+
+/* Căn giữa dọc cho icon tìm kiếm */
+.search-box .search-icon {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Search Autocomplete Dropdown */
+.search-autocomplete {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    right: 0;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    box-shadow: 0 8px 30px var(--shadow);
+    max-height: 450px;
+    overflow-y: auto;
+    z-index: 1100;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+    .search-autocomplete.show {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+.search-autocomplete-header {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.search-autocomplete-list {
+    padding: 0.5rem 0;
+}
+
+.search-autocomplete-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.8rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    text-decoration: none;
+    color: var(--text-primary);
+}
+
+    .search-autocomplete-item:hover {
+        background-color: var(--bg-tertiary);
+    }
+
+.search-autocomplete-item-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-tertiary);
+}
+
+.search-autocomplete-item-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.search-autocomplete-item-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    margin-bottom: 0.3rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.search-autocomplete-item-category {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.3rem;
+}
+
+.search-autocomplete-item-price {
+    font-weight: 700;
+    color: var(--accent);
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.search-autocomplete-item-original-price {
+    text-decoration: line-through;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    font-weight: 400;
+}
+
+.search-autocomplete-empty {
+    padding: 2rem;
+    text-align: center;
+    color: var(--text-secondary);
+}
+
+    .search-autocomplete-empty i {
+        font-size: 2.5rem;
+        margin-bottom: 0.8rem;
+        opacity: 0.4;
+    }
+
+.search-autocomplete-footer {
+    padding: 0.8rem 1rem;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.search-autocomplete-view-all {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+    .search-autocomplete-view-all:hover {
+        gap: 0.8rem;
+    }
+
+.search-loading {
+    padding: 1rem;
+    text-align: center;
+    color: var(--accent);
+}
+
+    .search-loading i {
+        font-size: 1.5rem;
+        animation: spin 1s linear infinite;
+    }
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Scrollbar cho autocomplete */
+.search-autocomplete::-webkit-scrollbar {
+    width: 6px;
+}
+
+.search-autocomplete::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+.search-autocomplete::-webkit-scrollbar-thumb {
+    background: var(--bg-tertiary);
+    border-radius: 3px;
+}
+
+    .search-autocomplete::-webkit-scrollbar-thumb:hover {
+        background: var(--accent);
+    }
+
+/* Highlight search term */
+.search-highlight {
+    background-color: rgba(59, 130, 246, 0.2);
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .search-box input {
+        width: 180px;
+    }
+
+        .search-box input:focus {
+            width: 280px;
+        }
+}
+
+@media (max-width: 768px) {
+    .search-box {
+        display: none; /* Ẩn search box trên mobile, sẽ thêm search button riêng */
+    }
+
+    /* Mobile search - Full width overlay */
+    .mobile-search-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: var(--bg-primary);
+        z-index: 2000;
+        padding: 1rem;
+        display: none;
+        flex-direction: column;
+    }
+
+        .mobile-search-overlay.active {
+            display: flex;
+        }
+
+    .mobile-search-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .mobile-search-close {
+        background: none;
+        border: none;
+        color: var(--text-primary);
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 0.5rem;
+    }
+
+    .mobile-search-input {
+        flex: 1;
+        background-color: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        color: var(--text-primary);
+        padding: 0.8rem 1rem;
+        border-radius: 8px;
+        font-size: 1rem;
+    }
+
+    .mobile-search-results {
+        flex: 1;
+        overflow-y: auto;
+    }
+}
+
+/* Search Results Page Styles */
+.search-results-header {
+    background-color: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border: 1px solid var(--border-color);
+}
+
+.search-results-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+    .search-results-title .search-term {
+        color: var(--accent);
+    }
+
+.search-results-info {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.search-no-results {
+    text-align: center;
+    padding: 4rem 2rem;
+    background-color: var(--bg-secondary);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.search-no-results-icon {
+    font-size: 4rem;
+    color: var(--text-secondary);
+    opacity: 0.3;
+    margin-bottom: 1.5rem;
+}
+
+.search-no-results h3 {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.search-no-results p {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.search-suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.search-suggestion-tag {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+}
+
+    .search-suggestion-tag:hover {
+        background-color: var(--accent);
+        color: white;
+        border-color: var(--accent);
+        transform: translateY(-2px);
+    }

@@ -75,7 +75,7 @@
                     {
                         <div class="cart-item" data-id="@item.ProductId" onclick="toggleCartItem(this)">
                             <input type="checkbox" class="cart-checkbox" data-price="@item.Price" onclick="event.stopPropagation(); updateCartTotal();">
-                            <img src="@item.ImageUrl" alt="@item.ProductName" class="cart-item-image">
+                            <img src="~/Content/Pic/images/@item.ImageUrl" alt="@item.ProductName" class="cart-item-image">
                             <div class="cart-item-info">
                                 <div class="cart-item-name">@item.ProductName</div>
                                 <div class="cart-item-price">@item.Price.ToString("N0") đ</div>

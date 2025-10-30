@@ -29,7 +29,7 @@
   </Table>
   <Table Name="dbo.Change_History" Member="Change_Histories">
     <Type Name="Change_History">
-      <Column Name="change_ID" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="change_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="ChangeByUserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="old_value" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="new_value" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
@@ -42,7 +42,7 @@
   </Table>
   <Table Name="dbo.Change_type" Member="Change_types">
     <Type Name="Change_type">
-      <Column Name="change_ID" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="change_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="change_name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="acction_type" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="entity_type" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
@@ -52,7 +52,7 @@
   <Table Name="dbo.chat_messages" Member="chat_messages">
     <Type Name="chat_message">
       <Column Name="MessageID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="ChatID" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="ChatID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="SenderID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Content" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="SentAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
@@ -62,7 +62,7 @@
   </Table>
   <Table Name="dbo.chat_session" Member="chat_sessions">
     <Type Name="chat_session">
-      <Column Name="ChatID" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ChatID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="ID_user" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="SupportID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Date_Create" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
@@ -135,7 +135,7 @@
   <Table Name="dbo.product_imports" Member="product_imports">
     <Type Name="product_import">
       <Column Name="import_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="supplier_id" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="supplier_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="product_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ID_user" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="import_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
@@ -152,13 +152,17 @@
     <Type Name="Product">
       <Column Name="Product_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Product_name" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
-      <Column Name="Type_Product_ID" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Type_Product_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Descriptions" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="Current_Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Sale_Price" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Column Name="Product_Image" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="supplier_ID" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="supplier_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Product_Status" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Original_Price" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Created_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Is_Featured" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Is_New" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="Product_cart_item" Member="cart_items" ThisKey="Product_ID" OtherKey="Product_ID" Type="cart_item" />
       <Association Name="Product_Orders_item" Member="Orders_items" ThisKey="Product_ID" OtherKey="Product_ID" Type="Orders_item" />
       <Association Name="Product_product_import" Member="product_imports" ThisKey="Product_ID" OtherKey="product_id" Type="product_import" />
@@ -178,9 +182,18 @@
       <Association Name="User_shopping_cart" Member="User" ThisKey="ID_user" OtherKey="ID_user" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.slide" Member="slides">
+    <Type Name="slide">
+      <Column Name="Slide_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Product_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="img" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="Product_slide" Member="Product" ThisKey="Product_ID" OtherKey="Product_ID" Type="Product" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.supplier" Member="suppliers">
     <Type Name="supplier">
-      <Column Name="supplier_ID" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="supplier_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="supplier_name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="email" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="Phone_Number" Type="System.String" DbType="VarChar(11)" CanBeNull="true" />
@@ -191,7 +204,7 @@
   </Table>
   <Table Name="dbo.Type_Product" Member="Type_Products">
     <Type Name="Type_Product">
-      <Column Name="Type_Product_ID" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Type_Product_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Type_Product_name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Association Name="Type_Product_Product" Member="Products" ThisKey="Type_Product_ID" OtherKey="Type_Product_ID" Type="Product" />
     </Type>
@@ -227,13 +240,64 @@
       <Association Name="User_User_detail" Member="User_detail" ThisKey="ID_user" OtherKey="ID_user" Type="User_detail" Cardinality="One" />
     </Type>
   </Table>
-  <Table Name="dbo.slide" Member="slides">
-    <Type Name="slide">
-      <Column Name="Slide_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Product_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="img" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Association Name="Product_slide" Member="Product" ThisKey="Product_ID" OtherKey="Product_ID" Type="Product" IsForeignKey="true" />
-    </Type>
-  </Table>
+  <Function Name="dbo.sp_GetProductsWithFilter" Method="sp_GetProductsWithFilter">
+    <Parameter Name="TypeProductID" Parameter="typeProductID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="SortBy" Parameter="sortBy" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="PageNumber" Parameter="pageNumber" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PageSize" Parameter="pageSize" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_GetProductsWithFilterResult">
+      <Column Name="Product_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Product_name" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="Sale_Price" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Original_Price" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Current_Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Product_Status" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Product_Image" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Type_Product_name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Descriptions" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="supplier_name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Created_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Is_Featured" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Is_New" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Total_Sold" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Discount_Percent" Type="System.Decimal" DbType="Decimal(38,15)" CanBeNull="true" />
+      <Column Name="TotalRecords" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_SearchProducts" Method="sp_SearchProducts">
+    <Parameter Name="SearchTerm" Parameter="searchTerm" Type="System.String" DbType="NVarChar(200)" />
+    <Parameter Name="MinSimilarity" Parameter="minSimilarity" Type="System.Decimal" DbType="Decimal(5,2)" />
+    <Parameter Name="PageNumber" Parameter="pageNumber" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PageSize" Parameter="pageSize" Type="System.Int32" DbType="Int" />
+    <Parameter Name="TypeProductID" Parameter="typeProductID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_SearchProductsResult">
+      <Column Name="Product_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Product_name" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="Sale_Price" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Original_Price" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Product_Image" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Current_Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Product_Status" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Type_Product_name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="supplier_name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Is_Featured" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Is_New" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Total_Sold" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SimilarityScore" Type="System.Decimal" DbType="Decimal(5,2)" CanBeNull="true" />
+      <Column Name="TotalRecords" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_QuickSearchProducts" Method="sp_QuickSearchProducts">
+    <Parameter Name="SearchTerm" Parameter="searchTerm" Type="System.String" DbType="NVarChar(200)" />
+    <Parameter Name="MaxResults" Parameter="maxResults" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_QuickSearchProductsResult">
+      <Column Name="Product_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Product_name" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="Sale_Price" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Original_Price" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Product_Image" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Type_Product_name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SimilarityScore" Type="System.Decimal" DbType="Decimal(5,2)" CanBeNull="true" />
+    </ElementType>
+  </Function>
 </Database>
